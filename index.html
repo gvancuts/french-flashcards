@@ -130,8 +130,8 @@ h1 span { color: var(--accent1); }
 <body>
 
 <header>
-  <span class="flag">🇫🇷</span>
-  <h1>Apprends le <span>Français</span>!</h1>
+  <span class="flag" id="langFlag">🇫🇷</span>
+  <h1 id="appHeadline">Apprends le <span>Français</span>!</h1>
 </header>
 
 <div class="tabs">
@@ -145,6 +145,7 @@ h1 span { color: var(--accent1); }
 <div class="top-controls">
   <button class="pill-btn active" id="mode-fr">🇫🇷 → 🇬🇧</button>
   <button class="pill-btn" id="mode-en">🇬🇧 → 🇫🇷</button>
+  <a href="start.html" style="font-size:0.78rem;font-weight:600;color:#B0BFCF;text-decoration:none;padding:8px 14px;border-radius:50px;background:rgba(58,90,140,0.07);">⇄ Switch</a>
 </div>
 
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
@@ -197,8 +198,17 @@ h1 span { color: var(--accent1); }
 <script>
 (function() {
   'use strict';
-  
-  const allCards = [
+
+  // --- Language / deck config (set by start.html via localStorage) ---
+  const _cfg = JSON.parse(localStorage.getItem('flashcard_config') || 'null') || {};
+  const LANG_KEY = _cfg.langKey || 'fr';
+  const LANG_LABEL = _cfg.label || 'French';
+  const LANG_FLAG = _cfg.flag || '🇫🇷';
+  const LANG_ACCENTS = _cfg.accents || ['à','â','ç','è','é','ê','ë','î','ï','ô','ù','û','ü','œ','æ'];
+  const LANG_ARTICLE_RE = _cfg.articleRegex ? new RegExp(_cfg.articleRegex, 'i') : /^(le|la|les|l')\s*/i;
+  const _savedDeck = JSON.parse(localStorage.getItem('flashcard_deck') || 'null');
+
+  const allCards = _savedDeck || [
     { fr: "les cheveux", en: "the hair", emoji: "💇", category: "visage" },
     { fr: "le front", en: "the forehead", emoji: "😊", category: "visage" },
     { fr: "les sourcils", en: "the eyebrows", emoji: "🤨", category: "visage" },
@@ -372,7 +382,7 @@ h1 span { color: var(--accent1); }
     { fr: "ils/elles sont allé(e)s", en: "they went, they have gone", emoji: "👥", category: "conjugations", verb: "aller", tense: "passé composé" },
   ];
 
-  const FR_ACCENTS = ['à','â','ç','è','é','ê','ë','î','ï','ô','ù','û','ü','œ','æ'];
+  // LANG_ACCENTS defined above from config (defaults to French accents)
 
   let cards = allCards.slice();
   let current = 0;
@@ -436,7 +446,7 @@ h1 span { color: var(--accent1); }
     }
     if (mode === 'en') {
       if (stripAccents(u) === stripAccents(t)) return true;
-      const tNoArticle = t.replace(/^(le|la|les|l')\s*/i, '');
+      const tNoArticle = t.replace(LANG_ARTICLE_RE, '');
       if (u === normalise(tNoArticle) || stripAccents(u) === stripAccents(tNoArticle)) return true;
     }
     return false;
@@ -448,8 +458,8 @@ h1 span { color: var(--accent1); }
     answered = false;
 
     if (mode === 'fr') {
-      document.getElementById('frontLabel').textContent = 'FRENCH';
-      document.getElementById('frontWord').textContent = card.fr;
+      document.getElementById('frontLabel').textContent = LANG_LABEL.toUpperCase();
+      document.getElementById('frontWord').textContent = card[LANG_KEY];
     } else {
       document.getElementById('frontLabel').textContent = 'ENGLISH';
       document.getElementById('frontWord').textContent = card.en;
@@ -500,7 +510,7 @@ h1 span { color: var(--accent1); }
       bar.innerHTML = ''; 
       return; 
     }
-    bar.innerHTML = FR_ACCENTS.map(function(a) {
+    bar.innerHTML = LANG_ACCENTS.map(function(a) {
       return '<button class="accent-btn" data-char="' + a + '">' + a + '</button>';
     }).join('');
     
@@ -535,7 +545,7 @@ h1 span { color: var(--accent1); }
     
     if (!userValue.trim()) return;
 
-    const target = mode === 'fr' ? card.en : card.fr;
+    const target = mode === 'fr' ? card.en : card[LANG_KEY];
     const correct = isCorrect(userValue, target);
     
     answered = true;
@@ -846,6 +856,19 @@ h1 span { color: var(--accent1); }
   setTimeout(function() {
     document.getElementById('frontWord').style.border = 'none';
   }, 1000);
+
+  // Apply language config to UI
+  document.getElementById('langFlag').textContent = LANG_FLAG;
+  document.getElementById('mode-fr').textContent = LANG_FLAG + ' → 🇬🇧';
+  document.getElementById('mode-en').textContent = '🇬🇧 → ' + LANG_FLAG;
+  document.title = LANG_LABEL + ' Flashcards';
+  if (_cfg.headline) document.getElementById('appHeadline').textContent = _cfg.headline;
+  if (_cfg.categories) {
+    ['visage', 'corps', 'prepositions', 'conjugations'].forEach(function(cat) {
+      var el = document.getElementById('tab-' + cat);
+      if (el && _cfg.categories[cat]) el.textContent = _cfg.categories[cat];
+    });
+  }
 
   // Initialize
   renderCard();
