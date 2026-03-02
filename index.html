@@ -111,12 +111,12 @@ h1 span { color: var(--accent1); }
 <div class="lang-grid">
   <button class="lang-btn" id="btn-fr" onclick="loadDeck('fr')">
     <span class="flag">🇫🇷</span>
-    <span class="name">French</span>
+    <span class="name" id="fr-name">French</span>
     <span class="count" id="fr-count">…</span>
   </button>
   <button class="lang-btn" id="btn-nl" onclick="loadDeck('nl')">
     <span class="flag">🇳🇱</span>
-    <span class="name">Dutch</span>
+    <span class="name" id="nl-name">Dutch</span>
     <span class="count" id="nl-count">…</span>
   </button>
 </div>
@@ -137,7 +137,8 @@ h1 span { color: var(--accent1); }
       continuePlaying: '▶ Continue playing',
       loading: 'Loading\u2026',
       cards: 'cards',
-      errorMsg: 'Could not load — make sure you are using a web server, not file://'
+      errorMsg: 'Could not load — make sure you are using a web server, not file://',
+      langFr: 'French', langNl: 'Dutch'
     },
     fr: {
       title: 'Entraîneur de Cartes',
@@ -146,7 +147,8 @@ h1 span { color: var(--accent1); }
       continuePlaying: '▶ Continuer à jouer',
       loading: 'Chargement\u2026',
       cards: 'cartes',
-      errorMsg: 'Impossible de charger — utilisez un serveur web, pas file://'
+      errorMsg: 'Impossible de charger — utilisez un serveur web, pas file://',
+      langFr: 'Français', langNl: 'Néerlandais'
     },
     nl: {
       title: 'Flitskaarten Trainer',
@@ -155,7 +157,8 @@ h1 span { color: var(--accent1); }
       continuePlaying: '▶ Doorgaan',
       loading: 'Laden\u2026',
       cards: 'kaarten',
-      errorMsg: 'Kon niet laden — gebruik een webserver, niet file://'
+      errorMsg: 'Kon niet laden — gebruik een webserver, niet file://',
+      langFr: 'Frans', langNl: 'Nederlands'
     }
   };
 
@@ -168,13 +171,11 @@ h1 span { color: var(--accent1); }
   function applyUiLang() {
     document.getElementById('subtitle').textContent = t('subtitle');
     document.title = t('title');
-    // Re-render the current deck box if visible
+    document.getElementById('fr-name').textContent = t('langFr');
+    document.getElementById('nl-name').textContent = t('langNl');
+    renderCount('fr');
+    renderCount('nl');
     renderCurrentDeck();
-    // Re-render any active status (keep error text as-is or clear it)
-    var status = document.getElementById('status');
-    if (status.className === 'status error') {
-      // Don't auto-clear errors on lang switch, just leave them
-    }
   }
 
   // Set the dropdown to match stored lang
@@ -187,12 +188,21 @@ h1 span { color: var(--accent1); }
   };
 
   // Show count on buttons once JSON is fetched
+  var fetchedCounts = {};
+
+  function renderCount(lang) {
+    var el = document.getElementById(lang + '-count');
+    if (el && fetchedCounts[lang] !== undefined) {
+      el.textContent = fetchedCounts[lang] + ' ' + t('cards');
+    }
+  }
+
   function fetchCount(lang) {
     fetch('data/' + lang + '.json')
       .then(function(r) { return r.json(); })
       .then(function(d) {
-        var el = document.getElementById(lang + '-count');
-        if (el) el.textContent = d.cards.length + ' ' + t('cards');
+        fetchedCounts[lang] = d.cards.length;
+        renderCount(lang);
       })
       .catch(function() {
         var el = document.getElementById(lang + '-count');

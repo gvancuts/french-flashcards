@@ -147,7 +147,7 @@ h1 span { color: var(--accent1); }
 <div class="top-controls">
   <button class="pill-btn active" id="mode-fr">🇫🇷 → 🇬🇧</button>
   <button class="pill-btn" id="mode-en">🇬🇧 → 🇫🇷</button>
-  <a href="index.html" style="font-size:0.78rem;font-weight:600;color:#B0BFCF;text-decoration:none;padding:8px 14px;border-radius:50px;background:rgba(58,90,140,0.07);">⇄ Switch</a>
+  <a id="switchLink" href="index.html" style="font-size:0.78rem;font-weight:600;color:#B0BFCF;text-decoration:none;padding:8px 14px;border-radius:50px;background:rgba(58,90,140,0.07);">⇄ Switch</a>
 </div>
 
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
@@ -184,11 +184,11 @@ h1 span { color: var(--accent1); }
 <button class="btn-skip" id="skipBtn">Skip →</button>
 
 <div class="stats">
-  <div class="stat"><div class="stat-num green" id="statCorrect">0</div><div class="stat-label">Correct</div></div>
+  <div class="stat"><div class="stat-num green" id="statCorrect">0</div><div class="stat-label" id="statLabelCorrect">Correct</div></div>
   <div class="stat-divider"></div>
-  <div class="stat"><div class="stat-num red" id="statIncorrect">0</div><div class="stat-label">Learning</div></div>
+  <div class="stat"><div class="stat-num red" id="statIncorrect">0</div><div class="stat-label" id="statLabelLearning">Learning</div></div>
   <div class="stat-divider"></div>
-  <div class="stat"><div class="stat-num blue" id="statRemaining">169</div><div class="stat-label">Remaining</div></div>
+  <div class="stat"><div class="stat-num blue" id="statRemaining">169</div><div class="stat-label" id="statLabelRemaining">Remaining</div></div>
 </div>
 
 <div class="bottom-actions">
@@ -211,11 +211,116 @@ h1 span { color: var(--accent1); }
     return;
   }
 
-  // UI language picker (cosmetic only — just persists the preference)
+  // --- i18n ---
+  var UI_STRINGS = {
+    en: {
+      tabAll: '🃏 All Words',
+      switchBtn: '⇄ Switch',
+      cardHint: '✏️ Type your answer below',
+      placeholder: 'Type your answer\u2026',
+      checkBtn: 'Check \u21b5',
+      nextBtn: 'Next card \u2192',
+      skipBtn: 'Skip \u2192',
+      shuffleBtn: '\uD83D\uDD00 Shuffle Cards',
+      reviewMissedBtn: '\uD83D\uDCD6 Review Missed',
+      reviewSkippedBtn: '\u23ED\uFE0F Review Skipped',
+      statCorrect: 'Correct', statLearning: 'Learning', statRemaining: 'Remaining',
+      reviewingMissed: '\uD83D\uDD01 Reviewing missed words only',
+      reviewingSkipped: '\uD83D\uDD01 Reviewing skipped words only',
+      exitReview: 'Exit Review',
+      cardOf: 'Card', of: 'of',
+      correct: 'Correct! \uD83C\uDF89', notQuite: 'Not quite\u2026',
+      answerLabel: 'Answer:', theAnswerWas: 'The answer was:',
+      deckComplete: '\uD83C\uDF89 Deck complete! {c}/{t} correct. Shuffle to go again!'
+    },
+    fr: {
+      tabAll: '🃏 Tous les mots',
+      switchBtn: '⇄ Changer',
+      cardHint: '✏️ Tapez votre réponse ci-dessous',
+      placeholder: 'Tapez votre réponse\u2026',
+      checkBtn: 'Vérifier \u21b5',
+      nextBtn: 'Carte suivante \u2192',
+      skipBtn: 'Passer \u2192',
+      shuffleBtn: '\uD83D\uDD00 Mélanger',
+      reviewMissedBtn: '\uD83D\uDCD6 Revoir les erreurs',
+      reviewSkippedBtn: '\u23ED\uFE0F Revoir les passées',
+      statCorrect: 'Correct', statLearning: 'En cours', statRemaining: 'Restant',
+      reviewingMissed: '\uD83D\uDD01 Révision des mots manqués',
+      reviewingSkipped: '\uD83D\uDD01 Révision des mots passés',
+      exitReview: 'Quitter',
+      cardOf: 'Carte', of: 'sur',
+      correct: 'Correct\u00a0! \uD83C\uDF89', notQuite: 'Pas tout à fait\u2026',
+      answerLabel: 'Réponse\u00a0:', theAnswerWas: 'La réponse était\u00a0:',
+      deckComplete: '\uD83C\uDF89 Deck terminé\u00a0! {c}/{t} correct. Mélangez pour recommencer\u00a0!'
+    },
+    nl: {
+      tabAll: '🃏 Alle woorden',
+      switchBtn: '⇄ Wissel',
+      cardHint: '✏️ Typ uw antwoord hieronder',
+      placeholder: 'Typ uw antwoord\u2026',
+      checkBtn: 'Controleer \u21b5',
+      nextBtn: 'Volgende kaart \u2192',
+      skipBtn: 'Overslaan \u2192',
+      shuffleBtn: '\uD83D\uDD00 Schudden',
+      reviewMissedBtn: '\uD83D\uDCD6 Fouten herhalen',
+      reviewSkippedBtn: '\u23ED\uFE0F Overgeslagen herhalen',
+      statCorrect: 'Goed', statLearning: 'Leren', statRemaining: 'Resterend',
+      reviewingMissed: '\uD83D\uDD01 Gemiste woorden herhalen',
+      reviewingSkipped: '\uD83D\uDD01 Overgeslagen woorden herhalen',
+      exitReview: 'Stoppen',
+      cardOf: 'Kaart', of: 'van',
+      correct: 'Goed! \uD83C\uDF89', notQuite: 'Niet helemaal\u2026',
+      answerLabel: 'Antwoord:', theAnswerWas: 'Het antwoord was:',
+      deckComplete: '\uD83C\uDF89 Deck klaar! {c}/{t} goed. Schud om opnieuw te beginnen!'
+    }
+  };
+
+  var uiLang = localStorage.getItem('ui_lang') || 'en';
+
+  function t(key) {
+    return (UI_STRINGS[uiLang] || UI_STRINGS.en)[key] || key;
+  }
+
+  function applyUiLang() {
+    document.getElementById('tab-all').textContent = t('tabAll');
+    document.getElementById('switchLink').textContent = t('switchBtn');
+    document.querySelector('.card-hint').textContent = t('cardHint');
+    document.getElementById('answerInput').placeholder = t('placeholder');
+    document.getElementById('checkBtn').textContent = t('checkBtn');
+    document.getElementById('nextBtn').textContent = t('nextBtn');
+    document.getElementById('skipBtn').textContent = t('skipBtn');
+    document.getElementById('shuffleBtn').textContent = t('shuffleBtn');
+    document.getElementById('reviewBtn').textContent = t('reviewMissedBtn');
+    document.getElementById('reviewSkippedBtn').textContent = t('reviewSkippedBtn');
+    document.getElementById('statLabelCorrect').textContent = t('statCorrect');
+    document.getElementById('statLabelLearning').textContent = t('statLearning');
+    document.getElementById('statLabelRemaining').textContent = t('statRemaining');
+    // Progress text
+    document.getElementById('progressText').textContent =
+      t('cardOf') + ' ' + (current + 1) + ' ' + t('of') + ' ' + cards.length;
+    // Review banner (if currently showing)
+    var banner = document.getElementById('reviewBanner');
+    if (banner.classList.contains('show')) {
+      var bannerType = banner.dataset.reviewType || 'missed';
+      renderReviewBanner(bannerType);
+    }
+  }
+
+  function renderReviewBanner(type) {
+    var banner = document.getElementById('reviewBanner');
+    banner.dataset.reviewType = type;
+    banner.innerHTML = t(type === 'skipped' ? 'reviewingSkipped' : 'reviewingMissed') +
+      ' <button id="exitReviewBtn">' + t('exitReview') + '</button>';
+    document.getElementById('exitReviewBtn').onclick = exitReview;
+  }
+
+  // UI language picker
   var uiLangSel = document.getElementById('uiLangSelect');
-  uiLangSel.value = localStorage.getItem('ui_lang') || 'en';
+  uiLangSel.value = uiLang;
   uiLangSel.onchange = function() {
-    localStorage.setItem('ui_lang', this.value);
+    uiLang = this.value;
+    localStorage.setItem('ui_lang', uiLang);
+    applyUiLang();
   };
 
   const LANG_KEY = _cfg.langKey || 'fr';
@@ -339,7 +444,7 @@ h1 span { color: var(--accent1); }
 
     const pct = ((current + 1) / cards.length) * 100;
     document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressText').textContent = 'Card ' + (current + 1) + ' of ' + cards.length;
+    document.getElementById('progressText').textContent = t('cardOf') + ' ' + (current + 1) + ' ' + t('of') + ' ' + cards.length;
 
     setTimeout(function() {
       document.getElementById('answerInput').focus();
@@ -405,7 +510,7 @@ h1 span { color: var(--accent1); }
       input.classList.add('correct-input');
       overlay.className = 'result-overlay correct-overlay show';
       document.getElementById('resultIcon').textContent = '✓';
-      document.getElementById('resultMsg').textContent = 'Correct! 🎉';
+      document.getElementById('resultMsg').textContent = t('correct');
       document.getElementById('resultAnswer').textContent = target;
       fb.textContent = '✓  "' + target + '"';
       fb.className = 'feedback-strip correct-strip show';
@@ -414,9 +519,9 @@ h1 span { color: var(--accent1); }
       input.classList.add('wrong-input');
       overlay.className = 'result-overlay wrong-overlay show';
       document.getElementById('resultIcon').textContent = '✗';
-      document.getElementById('resultMsg').textContent = 'Not quite…';
-      document.getElementById('resultAnswer').textContent = 'Answer: ' + target;
-      fb.textContent = '✗  The answer was: "' + target + '"';
+      document.getElementById('resultMsg').textContent = t('notQuite');
+      document.getElementById('resultAnswer').textContent = t('answerLabel') + ' ' + target;
+      fb.textContent = '✗  ' + t('theAnswerWas') + ' "' + target + '"';
       fb.className = 'feedback-strip wrong-strip show';
       scores[current] = false;
     }
@@ -449,7 +554,7 @@ h1 span { color: var(--accent1); }
     } else {
       const correct = Object.keys(scores).filter(function(k) { return scores[k] === true; }).length;
       const fb = document.getElementById('feedbackStrip');
-      fb.textContent = '🎉 Deck complete! ' + correct + '/' + cards.length + ' correct. Shuffle to go again!';
+      fb.textContent = t('deckComplete').replace('{c}', correct).replace('{t}', cards.length);
       fb.className = 'feedback-strip correct-strip show';
       document.getElementById('nextBtn').classList.remove('show');
     }
@@ -557,6 +662,7 @@ h1 span { color: var(--accent1); }
     scores = {};
     current = 0;
 
+    renderReviewBanner('missed');
     document.getElementById('reviewBanner').classList.add('show');
 
     renderCard();
@@ -584,10 +690,7 @@ h1 span { color: var(--accent1); }
     current = 0;
 
     document.getElementById('reviewBanner').classList.add('show');
-    document.getElementById('reviewBanner').innerHTML = '🔁 Reviewing skipped words only <button id="exitReviewBtn">Exit Review</button>';
-
-    // Re-attach exit button handler
-    document.getElementById('exitReviewBtn').onclick = exitReview;
+    renderReviewBanner('skipped');
 
     renderCard();
     updateStats();
@@ -602,10 +705,7 @@ h1 span { color: var(--accent1); }
     current = 0;
 
     document.getElementById('reviewBanner').classList.remove('show');
-    document.getElementById('reviewBanner').innerHTML = '🔁 Reviewing missed words only <button id="exitReviewBtn">Exit Review</button>';
-
-    // Re-attach exit button handler
-    document.getElementById('exitReviewBtn').onclick = exitReview;
+    renderReviewBanner('missed');
 
     renderCard();
     updateStats();
@@ -707,6 +807,7 @@ h1 span { color: var(--accent1); }
   }
 
   // Initialize
+  applyUiLang();
   renderCard();
   updateStats();
 })();
