@@ -102,9 +102,34 @@ h1 span { color: var(--accent1); }
 .btn-shuffle { padding: 10px 22px; background: rgba(58,90,140,0.08); color: var(--card-back); border-radius: 50px; border: none; font-weight: 700; font-size: 0.88rem; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .btn-review { padding: 10px 22px; background: var(--accent1); color: white; border-radius: 50px; border: none; font-weight: 700; font-size: 0.88rem; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .btn-review:disabled { opacity: 0.4; }
+
+/* UI language selector */
+.ui-lang-select {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(58,90,140,0.2);
+  background: white;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--card-back);
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(58,90,140,0.08);
+}
+.ui-lang-select:focus { border-color: var(--card-back); }
 </style>
 </head>
 <body>
+
+<select class="ui-lang-select" id="uiLangSelect">
+  <option value="en">🇬🇧 EN</option>
+  <option value="fr">🇫🇷 FR</option>
+  <option value="nl">🇳🇱 NL</option>
+</select>
 
 <header>
   <span class="flag" id="langFlag">🇫🇷</span>
@@ -185,6 +210,13 @@ h1 span { color: var(--accent1); }
     window.location.replace('index.html');
     return;
   }
+
+  // UI language picker (cosmetic only — just persists the preference)
+  var uiLangSel = document.getElementById('uiLangSelect');
+  uiLangSel.value = localStorage.getItem('ui_lang') || 'en';
+  uiLangSel.onchange = function() {
+    localStorage.setItem('ui_lang', this.value);
+  };
 
   const LANG_KEY = _cfg.langKey || 'fr';
   const LANG_LABEL = _cfg.label || 'French';
