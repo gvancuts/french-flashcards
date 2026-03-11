@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>French Flashcards</title>
+<title>Flashcard Trainer</title>
 <style>
 :root {
   --bg: #FFF8F0;
@@ -33,7 +33,7 @@ h1 { font-weight: 800; font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--card-
 h1 span { color: var(--accent1); }
 .subtitle { font-size: 0.95rem; color: #7A8BA0; margin-top: 4px; font-weight: 600; }
 
-.tabs { display: flex; gap: 8px; margin-bottom: 20px; background: rgba(255,255,255,0.7); border-radius: 50px; padding: 5px; }
+.tabs { display: flex; gap: 8px; margin-bottom: 20px; background: rgba(255,255,255,0.7); border-radius: 50px; padding: 5px; flex-wrap: wrap; justify-content: center; }
 .tab { padding: 8px 18px; border-radius: 40px; border: none; font-weight: 700; cursor: pointer; background: transparent; color: #7A8BA0; }
 .tab.active { background: var(--card-back); color: white; }
 
@@ -103,21 +103,11 @@ h1 span { color: var(--accent1); }
 .btn-review { padding: 10px 22px; background: var(--accent1); color: white; border-radius: 50px; border: none; font-weight: 700; font-size: 0.88rem; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .btn-review:disabled { opacity: 0.4; }
 
-/* UI language selector */
 .ui-lang-select {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  padding: 5px 10px;
-  border-radius: 20px;
-  border: 1.5px solid rgba(58,90,140,0.2);
-  background: white;
-  font-family: inherit;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--card-back);
-  cursor: pointer;
-  outline: none;
+  position: fixed; top: 14px; right: 14px; padding: 5px 10px;
+  border-radius: 20px; border: 1.5px solid rgba(58,90,140,0.2);
+  background: white; font-family: inherit; font-size: 0.8rem; font-weight: 700;
+  color: var(--card-back); cursor: pointer; outline: none;
   box-shadow: 0 2px 8px rgba(58,90,140,0.08);
 }
 .ui-lang-select:focus { border-color: var(--card-back); }
@@ -132,26 +122,26 @@ h1 span { color: var(--accent1); }
 </select>
 
 <header>
-  <span class="flag" id="langFlag">🇫🇷</span>
-  <h1 id="appHeadline">Apprends le <span>Français</span>!</h1>
+  <span class="flag" id="langFlag">🎴</span>
+  <h1 id="appHeadline">Flashcard <span>Trainer</span></h1>
 </header>
 
 <div class="tabs">
   <button class="tab active" id="tab-all">🃏 All Words</button>
-  <button class="tab" id="tab-visage">😊 Le Visage</button>
-  <button class="tab" id="tab-corps">🧍 Le Corps</button>
+  <button class="tab" id="tab-visage">😊 Face</button>
+  <button class="tab" id="tab-corps">🧍 Body</button>
   <button class="tab" id="tab-prepositions">📍 Prepositions</button>
   <button class="tab" id="tab-conjugations">🔄 Conjugations</button>
 </div>
 
 <div class="top-controls">
-  <button class="pill-btn active" id="mode-fr">🇫🇷 → 🇬🇧</button>
-  <button class="pill-btn" id="mode-en">🇬🇧 → 🇫🇷</button>
+  <button class="pill-btn active" id="mode-forward">→</button>
+  <button class="pill-btn" id="mode-reverse">←</button>
   <a id="switchLink" href="index.html" style="font-size:0.78rem;font-weight:600;color:#B0BFCF;text-decoration:none;padding:8px 14px;border-radius:50px;background:rgba(58,90,140,0.07);">⇄ Switch</a>
 </div>
 
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-<div class="progress-text" id="progressText">Card 1 of 169</div>
+<div class="progress-text" id="progressText">Card 1 of …</div>
 
 <div class="review-banner" id="reviewBanner">
   🔁 Reviewing missed words only
@@ -159,10 +149,10 @@ h1 span { color: var(--accent1); }
 </div>
 
 <div class="card-area">
-  <div class="card-label" id="frontLabel">FRENCH</div>
+  <div class="card-label" id="frontLabel">…</div>
   <div class="card-word" id="frontWord"></div>
   <div class="card-example" id="cardExample"></div>
-  <div class="card-hint">✏️ Type your answer below</div>
+  <div class="card-hint" id="cardHint">✏️ Type your answer below</div>
   <div class="result-overlay" id="resultOverlay">
     <div class="result-icon" id="resultIcon">✓</div>
     <div class="result-msg" id="resultMsg">Correct!</div>
@@ -188,7 +178,7 @@ h1 span { color: var(--accent1); }
   <div class="stat-divider"></div>
   <div class="stat"><div class="stat-num red" id="statIncorrect">0</div><div class="stat-label" id="statLabelLearning">Learning</div></div>
   <div class="stat-divider"></div>
-  <div class="stat"><div class="stat-num blue" id="statRemaining">169</div><div class="stat-label" id="statLabelRemaining">Remaining</div></div>
+  <div class="stat"><div class="stat-num blue" id="statRemaining">0</div><div class="stat-label" id="statLabelRemaining">Remaining</div></div>
 </div>
 
 <div class="bottom-actions">
@@ -201,11 +191,10 @@ h1 span { color: var(--accent1); }
 (function() {
   'use strict';
 
-  // --- Language / deck config (set by index.html via localStorage) ---
+  // --- Load config from localStorage ---
   const _cfg = JSON.parse(localStorage.getItem('flashcard_config') || 'null') || {};
   const _savedDeck = JSON.parse(localStorage.getItem('flashcard_deck') || 'null');
 
-  // Redirect to picker if no deck loaded
   if (!_savedDeck) {
     window.location.replace('index.html');
     return;
@@ -284,7 +273,7 @@ h1 span { color: var(--accent1); }
   function applyUiLang() {
     document.getElementById('tab-all').textContent = t('tabAll');
     document.getElementById('switchLink').textContent = t('switchBtn');
-    document.querySelector('.card-hint').textContent = t('cardHint');
+    document.getElementById('cardHint').textContent = t('cardHint');
     document.getElementById('answerInput').placeholder = t('placeholder');
     document.getElementById('checkBtn').textContent = t('checkBtn');
     document.getElementById('nextBtn').textContent = t('nextBtn');
@@ -295,15 +284,26 @@ h1 span { color: var(--accent1); }
     document.getElementById('statLabelCorrect').textContent = t('statCorrect');
     document.getElementById('statLabelLearning').textContent = t('statLearning');
     document.getElementById('statLabelRemaining').textContent = t('statRemaining');
-    // Progress text
     document.getElementById('progressText').textContent =
       t('cardOf') + ' ' + (current + 1) + ' ' + t('of') + ' ' + cards.length;
-    // Review banner (if currently showing)
     var banner = document.getElementById('reviewBanner');
     if (banner.classList.contains('show')) {
-      var bannerType = banner.dataset.reviewType || 'missed';
-      renderReviewBanner(bannerType);
+      renderReviewBanner(banner.dataset.reviewType || 'missed');
     }
+    // Update category tab labels from config
+    updateCategoryTabs();
+  }
+
+  function updateCategoryTabs() {
+    var cats = (_cfg.categories) || {};
+    ['visage','corps','prepositions','conjugations'].forEach(function(cat) {
+      var el = document.getElementById('tab-' + cat);
+      if (!el) return;
+      var labels = cats[cat];
+      if (labels) {
+        el.textContent = labels[uiLang] || labels.en || el.textContent;
+      }
+    });
   }
 
   function renderReviewBanner(type) {
@@ -314,7 +314,6 @@ h1 span { color: var(--accent1); }
     document.getElementById('exitReviewBtn').onclick = exitReview;
   }
 
-  // UI language picker
   var uiLangSel = document.getElementById('uiLangSelect');
   uiLangSel.value = uiLang;
   uiLangSel.onchange = function() {
@@ -323,22 +322,23 @@ h1 span { color: var(--accent1); }
     applyUiLang();
   };
 
-  const LANG_KEY = _cfg.langKey || 'fr';
-  const LANG_LABEL = _cfg.label || 'French';
-  const LANG_FLAG = _cfg.flag || '🇫🇷';
-  const LANG_ACCENTS = _cfg.accents || ['à','â','ç','è','é','ê','ë','î','ï','ô','ù','û','ü','œ','æ'];
-  const LANG_ARTICLE_RE = _cfg.articleRegex ? new RegExp(_cfg.articleRegex, 'i') : /^(le|la|les|l')\s*/i;
+  // --- Deck / language config ---
+  const SOURCE_LANG = _cfg.sourceLang || 'fr';
+  const TARGET_LANG = _cfg.targetLang || 'en';
+  const SOURCE_META = _cfg.source || { label: 'French', flag: '🇫🇷', accents: [], articleRegex: null };
+  const TARGET_META = _cfg.target || { label: 'English', flag: '🇬🇧', accents: [], articleRegex: null };
+  const SOURCE_ARTICLE_RE = SOURCE_META.articleRegex ? new RegExp(SOURCE_META.articleRegex, 'i') : null;
+  const TARGET_ARTICLE_RE = TARGET_META.articleRegex ? new RegExp(TARGET_META.articleRegex, 'i') : null;
 
   const allCards = _savedDeck;
-
   let cards = allCards.slice();
   let current = 0;
-  let mode = 'fr';
+  let mode = 'forward'; // 'forward': show source, type target | 'reverse': show target, type source
   let scores = {};
   let answered = false;
   let reviewMode = false;
   let originalCards = [];
-  let skippedCards = {}; // Track which cards were skipped
+  let skippedCards = {};
 
   function normalise(s) {
     return s.trim().toLowerCase().replace(/['']/g, "'").replace(/\s+/g, ' ');
@@ -350,52 +350,37 @@ h1 span { color: var(--accent1); }
 
   function isCorrect(userInput, target) {
     const u = normalise(userInput);
-    let t = normalise(target);
+    let tgt = normalise(target).replace(/\s*\([^)]*\)/g, '');
 
-    // Strip parenthetical notes like (informal), (formal/plural) from target
-    t = t.replace(/\s*\([^)]*\)/g, '');
+    if (u === tgt) return true;
 
-    if (u === t) return true;
-
-    // For multi-word answers (like "to, at" or "by, through"), accept either word
-    if (t.includes(',')) {
-      const options = t.split(',').map(function(opt) { return opt.trim(); });
-      for (var i = 0; i < options.length; i++) {
-        if (u === options[i]) return true;
+    // Accept any one value from a comma-separated list
+    if (tgt.includes(',')) {
+      const opts = tgt.split(',').map(function(o) { return o.trim(); });
+      for (var i = 0; i < opts.length; i++) {
+        if (u === opts[i]) return true;
       }
     }
-
-    // Also check if user input contains commas (to handle "to,at" vs "to, at")
     if (u.includes(',')) {
-      const userOptions = u.split(',').map(function(opt) { return opt.trim(); });
-      const targetOptions = t.split(',').map(function(opt) { return opt.trim(); });
-      // Check if user provided valid subset
-      var allValid = true;
-      for (var i = 0; i < userOptions.length; i++) {
-        var found = false;
-        for (var j = 0; j < targetOptions.length; j++) {
-          if (userOptions[i] === targetOptions[j]) {
-            found = true;
-            break;
-          }
-        }
-        if (!found) {
-          allValid = false;
-          break;
-        }
+      const userOpts = u.split(',').map(function(o) { return o.trim(); });
+      const tgtOpts = tgt.split(',').map(function(o) { return o.trim(); });
+      var allValid = userOpts.length > 0;
+      for (var i = 0; i < userOpts.length; i++) {
+        if (tgtOpts.indexOf(userOpts[i]) < 0) { allValid = false; break; }
       }
-      if (allValid && userOptions.length > 0) return true;
+      if (allValid) return true;
     }
 
-    if (mode === 'fr') {
-      const tNoThe = t.replace(/^the\s+/, '');
-      if (u === tNoThe) return true;
+    // Accent-insensitive match
+    if (stripAccents(u) === stripAccents(tgt)) return true;
+
+    // Strip articles based on which language the user is typing
+    var articleRe = (mode === 'forward') ? TARGET_ARTICLE_RE : SOURCE_ARTICLE_RE;
+    if (articleRe) {
+      const noArticle = normalise(tgt.replace(articleRe, ''));
+      if (u === noArticle || stripAccents(u) === stripAccents(noArticle)) return true;
     }
-    if (mode === 'en') {
-      if (stripAccents(u) === stripAccents(t)) return true;
-      const tNoArticle = t.replace(LANG_ARTICLE_RE, '');
-      if (u === normalise(tNoArticle) || stripAccents(u) === stripAccents(tNoArticle)) return true;
-    }
+
     return false;
   }
 
@@ -404,28 +389,18 @@ h1 span { color: var(--accent1); }
     if (!card) return;
     answered = false;
 
-    if (mode === 'fr') {
-      document.getElementById('frontLabel').textContent = LANG_LABEL.toUpperCase();
-      document.getElementById('frontWord').textContent = card[LANG_KEY];
-    } else {
-      document.getElementById('frontLabel').textContent = 'ENGLISH';
-      document.getElementById('frontWord').textContent = card.en;
-    }
+    const showLang = (mode === 'forward') ? SOURCE_LANG : TARGET_LANG;
+    const showMeta = (mode === 'forward') ? SOURCE_META : TARGET_META;
 
-    // Show example sentence based on mode to avoid giving away answers
-    // For French→English mode: show French example (doesn't reveal English answer)
-    // For English→French mode: show English example (doesn't reveal French answer)
+    document.getElementById('frontLabel').textContent = showMeta.label.toUpperCase();
+    document.getElementById('frontWord').textContent = card[showLang] || '';
+
+    // Show example in the display language (doesn't reveal the answer)
+    const exKey = 'example_' + showLang;
     const exampleEl = document.getElementById('cardExample');
-    if (card.example && card.exampleEn) {
-      if (mode === 'fr') {
-        // Show French example
-        exampleEl.textContent = card.example;
-        exampleEl.style.display = 'block';
-      } else {
-        // Show English example
-        exampleEl.textContent = card.exampleEn;
-        exampleEl.style.display = 'block';
-      }
+    if (card[exKey]) {
+      exampleEl.textContent = card[exKey];
+      exampleEl.style.display = 'block';
     } else {
       exampleEl.textContent = '';
       exampleEl.style.display = 'none';
@@ -444,67 +419,55 @@ h1 span { color: var(--accent1); }
 
     const pct = ((current + 1) / cards.length) * 100;
     document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressText').textContent = t('cardOf') + ' ' + (current + 1) + ' ' + t('of') + ' ' + cards.length;
+    document.getElementById('progressText').textContent =
+      t('cardOf') + ' ' + (current + 1) + ' ' + t('of') + ' ' + cards.length;
 
-    setTimeout(function() {
-      document.getElementById('answerInput').focus();
-    }, 100);
+    setTimeout(function() { document.getElementById('answerInput').focus(); }, 100);
   }
 
   function renderAccentBar() {
     const bar = document.getElementById('accentBar');
-    if (mode !== 'en') {
-      bar.innerHTML = '';
-      return;
-    }
-    bar.innerHTML = LANG_ACCENTS.map(function(a) {
+    const typeMeta = (mode === 'forward') ? TARGET_META : SOURCE_META;
+    const accents = typeMeta.accents || [];
+    if (accents.length === 0) { bar.innerHTML = ''; return; }
+    bar.innerHTML = accents.map(function(a) {
       return '<button class="accent-btn" data-char="' + a + '">' + a + '</button>';
     }).join('');
-
-    // Add click handlers to accent buttons
     var btns = bar.querySelectorAll('.accent-btn');
     for (var i = 0; i < btns.length; i++) {
-      btns[i].onclick = function() {
-        insertAccent(this.getAttribute('data-char'));
-      };
+      btns[i].onclick = function() { insertAccent(this.getAttribute('data-char')); };
     }
   }
 
   function insertAccent(char) {
     const input = document.getElementById('answerInput');
     if (input.disabled) return;
-    const s = input.selectionStart;
-    const e = input.selectionEnd;
+    const s = input.selectionStart, e = input.selectionEnd;
     input.value = input.value.slice(0, s) + char + input.value.slice(e);
     input.selectionStart = input.selectionEnd = s + 1;
     input.focus();
   }
 
   function checkAnswer() {
-    if (answered) {
-      nextCard();
-      return;
-    }
+    if (answered) { nextCard(); return; }
 
     const card = cards[current];
     const input = document.getElementById('answerInput');
     const userValue = input.value;
-
     if (!userValue.trim()) return;
 
-    const target = mode === 'fr' ? card.en : card[LANG_KEY];
+    const typeLang = (mode === 'forward') ? TARGET_LANG : SOURCE_LANG;
+    const target = card[typeLang] || '';
     const correct = isCorrect(userValue, target);
 
     answered = true;
     input.disabled = true;
     document.getElementById('checkBtn').disabled = true;
-
-    // Clear skip status since card is now answered
     delete skippedCards[current];
 
     const overlay = document.getElementById('resultOverlay');
     const fb = document.getElementById('feedbackStrip');
-    const resultExampleEl = document.getElementById('resultExample');
+    const resultExEl = document.getElementById('resultExample');
 
     if (correct) {
       input.classList.add('correct-input');
@@ -526,21 +489,15 @@ h1 span { color: var(--accent1); }
       scores[current] = false;
     }
 
-    // Show example translation in result overlay
-    // If we showed French example, now show English translation
-    // If we showed English example, now show French translation
-    if (card.exampleEn && card.example) {
-      if (mode === 'fr') {
-        // Was showing French example, now show English
-        resultExampleEl.textContent = card.exampleEn;
-      } else {
-        // Was showing English example, now show French
-        resultExampleEl.textContent = card.example;
-      }
-      resultExampleEl.style.display = 'block';
+    // Show result-side example (the answer language's example)
+    const resultLang = (mode === 'forward') ? TARGET_LANG : SOURCE_LANG;
+    const exResultKey = 'example_' + resultLang;
+    if (card[exResultKey]) {
+      resultExEl.textContent = card[exResultKey];
+      resultExEl.style.display = 'block';
     } else {
-      resultExampleEl.textContent = '';
-      resultExampleEl.style.display = 'none';
+      resultExEl.textContent = '';
+      resultExEl.style.display = 'none';
     }
 
     updateStats();
@@ -561,205 +518,92 @@ h1 span { color: var(--accent1); }
   }
 
   function skipCard() {
-    // Mark card as skipped
     skippedCards[current] = true;
-
-    // Skip without marking - just go to next card
-    if (current < cards.length - 1) {
-      current++;
-      renderCard();
-    }
-
+    if (current < cards.length - 1) { current++; renderCard(); }
     updateStats();
   }
 
   function updateStats() {
-    var correct = Object.keys(scores).filter(function(k) { return scores[k] === true; }).length;
+    var correct   = Object.keys(scores).filter(function(k) { return scores[k] === true; }).length;
     var incorrect = Object.keys(scores).filter(function(k) { return scores[k] === false; }).length;
-    var skipped = Object.keys(skippedCards).length;
+    var skipped   = Object.keys(skippedCards).length;
     var remaining = Math.max(0, cards.length - Object.keys(scores).length - skipped);
-
     document.getElementById('statCorrect').textContent = correct;
     document.getElementById('statIncorrect').textContent = incorrect;
     document.getElementById('statRemaining').textContent = remaining;
-
     document.getElementById('reviewBtn').disabled = incorrect === 0;
     document.getElementById('reviewSkippedBtn').disabled = skipped === 0;
   }
 
   function setCategory(cat) {
-    document.getElementById('tab-all').classList.toggle('active', cat === 'all');
-    document.getElementById('tab-visage').classList.toggle('active', cat === 'visage');
-    document.getElementById('tab-corps').classList.toggle('active', cat === 'corps');
-    document.getElementById('tab-prepositions').classList.toggle('active', cat === 'prepositions');
-    document.getElementById('tab-conjugations').classList.toggle('active', cat === 'conjugations');
-
-    if (cat === 'all') {
-      cards = allCards.slice();
-    } else {
-      cards = allCards.filter(function(c) { return c.category === cat; });
-    }
-
-    scores = {};
-    skippedCards = {};
-    current = 0;
-    reviewMode = false;
+    ['all','visage','corps','prepositions','conjugations'].forEach(function(c) {
+      document.getElementById('tab-' + c).classList.toggle('active', c === cat);
+    });
+    cards = (cat === 'all') ? allCards.slice() : allCards.filter(function(c) { return c.category === cat; });
+    scores = {}; skippedCards = {}; current = 0; reviewMode = false;
     document.getElementById('reviewBanner').classList.remove('show');
-    renderCard();
-    updateStats();
+    renderCard(); updateStats();
   }
 
   function setMode(m) {
     mode = m;
-    document.getElementById('mode-fr').classList.toggle('active', m === 'fr');
-    document.getElementById('mode-en').classList.toggle('active', m === 'en');
-    scores = {};
-    skippedCards = {};
-    current = 0;
-    reviewMode = false;
+    document.getElementById('mode-forward').classList.toggle('active', m === 'forward');
+    document.getElementById('mode-reverse').classList.toggle('active', m === 'reverse');
+    scores = {}; skippedCards = {}; current = 0; reviewMode = false;
     document.getElementById('reviewBanner').classList.remove('show');
-    renderCard();
-    updateStats();
+    renderCard(); updateStats();
   }
 
   function shuffleCards() {
     if (reviewMode) {
-      cards = originalCards.slice();
-      reviewMode = false;
-      originalCards = [];
+      cards = originalCards.slice(); reviewMode = false; originalCards = [];
       document.getElementById('reviewBanner').classList.remove('show');
     }
-
     for (var i = cards.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
-      var temp = cards[i];
-      cards[i] = cards[j];
-      cards[j] = temp;
+      var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
     }
-
-    scores = {};
-    skippedCards = {};
-    current = 0;
-    renderCard();
-    updateStats();
+    scores = {}; skippedCards = {}; current = 0;
+    renderCard(); updateStats();
   }
 
   function reviewMissed() {
-    var missedIndices = [];
-    for (var k in scores) {
-      if (scores[k] === false) {
-        missedIndices.push(parseInt(k));
-      }
-    }
-
-    if (missedIndices.length === 0) return;
-
-    originalCards = cards.slice();
-    reviewMode = true;
-
-    cards = missedIndices.map(function(idx) { return originalCards[idx]; });
-
-    scores = {};
-    current = 0;
-
+    var missed = Object.keys(scores).filter(function(k) { return scores[k] === false; }).map(Number);
+    if (missed.length === 0) return;
+    originalCards = cards.slice(); reviewMode = true;
+    cards = missed.map(function(i) { return originalCards[i]; });
+    scores = {}; current = 0;
     renderReviewBanner('missed');
     document.getElementById('reviewBanner').classList.add('show');
-
-    renderCard();
-    updateStats();
+    renderCard(); updateStats();
   }
 
   function reviewSkipped() {
-    var skippedIndices = [];
-    for (var k in skippedCards) {
-      if (skippedCards[k]) {
-        skippedIndices.push(parseInt(k));
-      }
-    }
-
-    if (skippedIndices.length === 0) return;
-
-    originalCards = cards.slice();
-    reviewMode = true;
-
-    cards = skippedIndices.map(function(idx) { return originalCards[idx]; });
-
-    // Clear skipped status for review
-    skippedCards = {};
-    scores = {};
-    current = 0;
-
+    var skipped = Object.keys(skippedCards).filter(function(k) { return skippedCards[k]; }).map(Number);
+    if (skipped.length === 0) return;
+    originalCards = cards.slice(); reviewMode = true;
+    cards = skipped.map(function(i) { return originalCards[i]; });
+    skippedCards = {}; scores = {}; current = 0;
     document.getElementById('reviewBanner').classList.add('show');
     renderReviewBanner('skipped');
-
-    renderCard();
-    updateStats();
+    renderCard(); updateStats();
   }
 
   function exitReview() {
     if (!reviewMode) return;
-
-    cards = originalCards.slice();
-    reviewMode = false;
-    originalCards = [];
-    current = 0;
-
+    cards = originalCards.slice(); reviewMode = false; originalCards = []; current = 0;
     document.getElementById('reviewBanner').classList.remove('show');
-    renderReviewBanner('missed');
-
-    renderCard();
-    updateStats();
+    renderCard(); updateStats();
   }
 
-  // Setup event handlers
-  document.getElementById('checkBtn').onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    checkAnswer();
-    return false;
-  };
-
-  document.getElementById('nextBtn').onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    nextCard();
-    return false;
-  };
-
-  document.getElementById('skipBtn').onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    skipCard();
-    return false;
-  };
-
-  document.getElementById('shuffleBtn').onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    shuffleCards();
-    return false;
-  };
-
-  document.getElementById('reviewBtn').onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    reviewMissed();
-    return false;
-  };
-
-  document.getElementById('reviewSkippedBtn').onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    reviewSkipped();
-    return false;
-  };
-
-  document.getElementById('exitReviewBtn').onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    exitReview();
-    return false;
-  };
+  // --- Event handlers ---
+  document.getElementById('checkBtn').onclick = function(e) { e.preventDefault(); checkAnswer(); return false; };
+  document.getElementById('nextBtn').onclick = function(e) { e.preventDefault(); nextCard(); return false; };
+  document.getElementById('skipBtn').onclick = function(e) { e.preventDefault(); skipCard(); return false; };
+  document.getElementById('shuffleBtn').onclick = function(e) { e.preventDefault(); shuffleCards(); return false; };
+  document.getElementById('reviewBtn').onclick = function(e) { e.preventDefault(); reviewMissed(); return false; };
+  document.getElementById('reviewSkippedBtn').onclick = function(e) { e.preventDefault(); reviewSkipped(); return false; };
+  document.getElementById('exitReviewBtn').onclick = function(e) { e.preventDefault(); exitReview(); return false; };
 
   document.getElementById('tab-all').onclick = function() { setCategory('all'); };
   document.getElementById('tab-visage').onclick = function() { setCategory('visage'); };
@@ -767,46 +611,32 @@ h1 span { color: var(--accent1); }
   document.getElementById('tab-prepositions').onclick = function() { setCategory('prepositions'); };
   document.getElementById('tab-conjugations').onclick = function() { setCategory('conjugations'); };
 
-  document.getElementById('mode-fr').onclick = function() { setMode('fr'); };
-  document.getElementById('mode-en').onclick = function() { setMode('en'); };
+  document.getElementById('mode-forward').onclick = function() { setMode('forward'); };
+  document.getElementById('mode-reverse').onclick = function() { setMode('reverse'); };
 
   document.getElementById('answerInput').onkeypress = function(e) {
     if (e.key === 'Enter' || e.keyCode === 13) {
       e.preventDefault();
-      if (!answered) {
-        checkAnswer();
-      } else {
-        // If already answered and Next button is showing, trigger it
-        nextCard();
-      }
+      answered ? nextCard() : checkAnswer();
     }
   };
-
-  // Global keyboard handler for Next button when input is disabled
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-      // If answered and Next button is visible, trigger it
-      if (answered && document.getElementById('nextBtn').classList.contains('show')) {
-        e.preventDefault();
-        nextCard();
-      }
+    if ((e.key === 'Enter' || e.keyCode === 13) && answered &&
+        document.getElementById('nextBtn').classList.contains('show')) {
+      e.preventDefault(); nextCard();
     }
   });
 
-  // Apply language config to UI
-  document.getElementById('langFlag').textContent = LANG_FLAG;
-  document.getElementById('mode-fr').textContent = LANG_FLAG + ' → 🇬🇧';
-  document.getElementById('mode-en').textContent = '🇬🇧 → ' + LANG_FLAG;
-  document.title = LANG_LABEL + ' Flashcards';
-  if (_cfg.headline) document.getElementById('appHeadline').textContent = _cfg.headline;
-  if (_cfg.categories) {
-    ['visage', 'corps', 'prepositions', 'conjugations'].forEach(function(cat) {
-      var el = document.getElementById('tab-' + cat);
-      if (el && _cfg.categories[cat]) el.textContent = _cfg.categories[cat];
-    });
-  }
+  // --- Apply config to UI ---
+  document.getElementById('langFlag').textContent = SOURCE_META.flag + ' → ' + TARGET_META.flag;
+  document.getElementById('appHeadline').innerHTML =
+    SOURCE_META.flag + ' <span>' + SOURCE_META.label + '</span> → ' +
+    TARGET_META.flag + ' ' + TARGET_META.label;
+  document.getElementById('mode-forward').textContent = SOURCE_META.flag + ' → ' + TARGET_META.flag;
+  document.getElementById('mode-reverse').textContent = TARGET_META.flag + ' → ' + SOURCE_META.flag;
+  document.title = SOURCE_META.label + ' ↔ ' + TARGET_META.label;
 
-  // Initialize
+  // --- Init ---
   applyUiLang();
   renderCard();
   updateStats();

@@ -1,0 +1,1726 @@
+{
+  "languages": {
+    "fr": {
+      "label": "French",
+      "flag": "🇫🇷",
+      "accents": [
+        "à",
+        "â",
+        "ç",
+        "è",
+        "é",
+        "ê",
+        "ë",
+        "î",
+        "ï",
+        "ô",
+        "ù",
+        "û",
+        "ü",
+        "œ",
+        "æ"
+      ],
+      "articleRegex": "^(le|la|les|l')\\s*"
+    },
+    "nl": {
+      "label": "Dutch",
+      "flag": "🇳🇱",
+      "accents": [
+        "ë",
+        "ï",
+        "ö",
+        "ü",
+        "é",
+        "è",
+        "ê",
+        "à",
+        "â",
+        "ç",
+        "ô",
+        "û"
+      ],
+      "articleRegex": "^(de|het|een)\\s*"
+    },
+    "en": {
+      "label": "English",
+      "flag": "🇬🇧",
+      "accents": [],
+      "articleRegex": "^the\\s+"
+    }
+  },
+  "categories": {
+    "visage": {
+      "en": "😊 Face",
+      "fr": "😊 Le Visage",
+      "nl": "😊 Het Gezicht"
+    },
+    "corps": {
+      "en": "🧍 Body",
+      "fr": "🧍 Le Corps",
+      "nl": "🧍 Het Lichaam"
+    },
+    "prepositions": {
+      "en": "📍 Prepositions",
+      "fr": "📍 Prépositions",
+      "nl": "📍 Voorzetsels"
+    },
+    "conjugations": {
+      "en": "🔄 Conjugations",
+      "fr": "🔄 Conjugaisons",
+      "nl": "🔄 Werkwoorden"
+    }
+  },
+  "cards": [
+    {
+      "fr": "les cheveux",
+      "en": "the hair",
+      "emoji": "💇",
+      "category": "visage",
+      "nl": "het haar"
+    },
+    {
+      "fr": "le front",
+      "en": "the forehead",
+      "emoji": "😊",
+      "category": "visage",
+      "nl": "het voorhoofd"
+    },
+    {
+      "fr": "les sourcils",
+      "en": "the eyebrows",
+      "emoji": "🤨",
+      "category": "visage",
+      "nl": "de wenkbrauwen"
+    },
+    {
+      "fr": "les yeux",
+      "en": "the eyes",
+      "emoji": "👁️",
+      "category": "visage",
+      "nl": "de ogen"
+    },
+    {
+      "fr": "les cils",
+      "en": "the eyelashes",
+      "emoji": "😉",
+      "category": "visage",
+      "nl": "de wimpers"
+    },
+    {
+      "fr": "les oreilles",
+      "en": "the ears",
+      "emoji": "👂",
+      "category": "visage",
+      "nl": "de oren"
+    },
+    {
+      "fr": "le nez",
+      "en": "the nose",
+      "emoji": "👃",
+      "category": "visage",
+      "nl": "de neus"
+    },
+    {
+      "fr": "les narines",
+      "en": "the nostrils",
+      "emoji": "👃",
+      "category": "visage",
+      "nl": "de neusgaten"
+    },
+    {
+      "fr": "les joues",
+      "en": "the cheeks",
+      "emoji": "😊",
+      "category": "visage",
+      "nl": "de wangen"
+    },
+    {
+      "fr": "la bouche",
+      "en": "the mouth",
+      "emoji": "👄",
+      "category": "visage",
+      "nl": "de mond"
+    },
+    {
+      "fr": "les lèvres",
+      "en": "the lips",
+      "emoji": "💋",
+      "category": "visage",
+      "nl": "de lippen"
+    },
+    {
+      "fr": "les dents",
+      "en": "the teeth",
+      "emoji": "🦷",
+      "category": "visage",
+      "nl": "de tanden"
+    },
+    {
+      "fr": "le menton",
+      "en": "the chin",
+      "emoji": "🧏",
+      "category": "visage",
+      "nl": "de kin"
+    },
+    {
+      "fr": "la tête",
+      "en": "the head",
+      "emoji": "🧠",
+      "category": "corps",
+      "nl": "het hoofd"
+    },
+    {
+      "fr": "le cou",
+      "en": "the neck",
+      "emoji": "🧣",
+      "category": "corps",
+      "nl": "de nek"
+    },
+    {
+      "fr": "le dos",
+      "en": "the back",
+      "emoji": "🔙",
+      "category": "corps",
+      "nl": "de rug"
+    },
+    {
+      "fr": "les épaules",
+      "en": "the shoulders",
+      "emoji": "💪",
+      "category": "corps",
+      "nl": "de schouders"
+    },
+    {
+      "fr": "le bras",
+      "en": "the arm",
+      "emoji": "💪",
+      "category": "corps",
+      "nl": "de arm"
+    },
+    {
+      "fr": "le coude",
+      "en": "the elbow",
+      "emoji": "🦾",
+      "category": "corps",
+      "nl": "de elleboog"
+    },
+    {
+      "fr": "la poitrine",
+      "en": "the chest",
+      "emoji": "🫀",
+      "category": "corps",
+      "nl": "de borst"
+    },
+    {
+      "fr": "le nombril",
+      "en": "the belly button",
+      "emoji": "🎯",
+      "category": "corps",
+      "nl": "de navel"
+    },
+    {
+      "fr": "le poignet",
+      "en": "the wrist",
+      "emoji": "⌚",
+      "category": "corps",
+      "nl": "de pols"
+    },
+    {
+      "fr": "la main",
+      "en": "the hand",
+      "emoji": "✋",
+      "category": "corps",
+      "nl": "de hand"
+    },
+    {
+      "fr": "les doigts",
+      "en": "the fingers",
+      "emoji": "🖐️",
+      "category": "corps",
+      "nl": "de vingers"
+    },
+    {
+      "fr": "le ventre",
+      "en": "the belly",
+      "emoji": "🫃",
+      "category": "corps",
+      "nl": "de buik"
+    },
+    {
+      "fr": "les fesses",
+      "en": "the buttocks",
+      "emoji": "🍑",
+      "category": "corps",
+      "nl": "de billen"
+    },
+    {
+      "fr": "la jambe",
+      "en": "the leg",
+      "emoji": "🦵",
+      "category": "corps",
+      "nl": "het been"
+    },
+    {
+      "fr": "la cuisse",
+      "en": "the thigh",
+      "emoji": "🦵",
+      "category": "corps",
+      "nl": "de dij"
+    },
+    {
+      "fr": "le genou",
+      "en": "the knee",
+      "emoji": "🦵",
+      "category": "corps",
+      "nl": "de knie"
+    },
+    {
+      "fr": "le mollet",
+      "en": "the calf",
+      "emoji": "🦵",
+      "category": "corps",
+      "nl": "de kuit"
+    },
+    {
+      "fr": "la cheville",
+      "en": "the ankle",
+      "emoji": "🦶",
+      "category": "corps",
+      "nl": "de enkel"
+    },
+    {
+      "fr": "le pied",
+      "en": "the foot",
+      "emoji": "🦶",
+      "category": "corps",
+      "nl": "de voet"
+    },
+    {
+      "fr": "le talon",
+      "en": "the heel",
+      "emoji": "👠",
+      "category": "corps",
+      "nl": "de hiel"
+    },
+    {
+      "fr": "les orteils",
+      "en": "the toes",
+      "emoji": "🦶",
+      "category": "corps",
+      "nl": "de tenen"
+    },
+    {
+      "fr": "le pouce",
+      "en": "the thumb",
+      "emoji": "👍",
+      "category": "corps",
+      "nl": "de duim"
+    },
+    {
+      "fr": "l'index",
+      "en": "the index finger",
+      "emoji": "☝️",
+      "category": "corps",
+      "nl": "de wijsvinger"
+    },
+    {
+      "fr": "le majeur",
+      "en": "the middle finger",
+      "emoji": "🖕",
+      "category": "corps",
+      "nl": "de middelvinger"
+    },
+    {
+      "fr": "l'annulaire",
+      "en": "the ring finger",
+      "emoji": "💍",
+      "category": "corps",
+      "nl": "de ringvinger"
+    },
+    {
+      "fr": "l'auriculaire",
+      "en": "the little finger",
+      "emoji": "🤙",
+      "category": "corps",
+      "nl": "de pink"
+    },
+    {
+      "fr": "à",
+      "en": "to, at",
+      "emoji": "➡️",
+      "category": "prepositions",
+      "example_fr": "Je vais à Paris • Je suis à la maison",
+      "example_en": "I'm going to Paris • I'm at home"
+    },
+    {
+      "fr": "de",
+      "en": "of, from",
+      "emoji": "⬅️",
+      "category": "prepositions",
+      "example_fr": "Le livre de Marie • Je viens de France",
+      "example_en": "Marie's book (book of Marie) • I come from France",
+      "nl": "van",
+      "example_nl": "Het boek van Marie • Ik kom van Nederland"
+    },
+    {
+      "fr": "dans",
+      "en": "in",
+      "emoji": "📦",
+      "category": "prepositions",
+      "example_fr": "Le chat est dans la boîte",
+      "example_en": "The cat is in the box",
+      "nl": "in",
+      "example_nl": "De kat zit in de doos"
+    },
+    {
+      "fr": "sur",
+      "en": "on",
+      "emoji": "🔝",
+      "category": "prepositions",
+      "example_fr": "Le livre est sur la table",
+      "example_en": "The book is on the table",
+      "nl": "op",
+      "example_nl": "Het boek ligt op de tafel"
+    },
+    {
+      "fr": "sous",
+      "en": "under",
+      "emoji": "⬇️",
+      "category": "prepositions",
+      "example_fr": "Le chien est sous la table",
+      "example_en": "The dog is under the table",
+      "nl": "onder",
+      "example_nl": "De hond ligt onder de tafel"
+    },
+    {
+      "fr": "avec",
+      "en": "with",
+      "emoji": "🤝",
+      "category": "prepositions",
+      "example_fr": "Je vais avec mon ami",
+      "example_en": "I'm going with my friend",
+      "nl": "met",
+      "example_nl": "Ik ga met mijn vriend"
+    },
+    {
+      "fr": "sans",
+      "en": "without",
+      "emoji": "🚫",
+      "category": "prepositions",
+      "example_fr": "Un café sans sucre",
+      "example_en": "A coffee without sugar",
+      "nl": "zonder",
+      "example_nl": "Koffie zonder suiker"
+    },
+    {
+      "fr": "pour",
+      "en": "for",
+      "emoji": "🎁",
+      "category": "prepositions",
+      "example_fr": "C'est pour toi",
+      "example_en": "It's for you"
+    },
+    {
+      "fr": "par",
+      "en": "by, through",
+      "emoji": "🚪",
+      "category": "prepositions",
+      "example_fr": "Écrit par Paul • Je passe par le parc",
+      "example_en": "Written by Paul • I go through the park"
+    },
+    {
+      "fr": "entre",
+      "en": "between",
+      "emoji": "↔️",
+      "category": "prepositions",
+      "example_fr": "Entre toi et moi",
+      "example_en": "Between you and me",
+      "nl": "tussen",
+      "example_nl": "Tussen jou en mij"
+    },
+    {
+      "fr": "derrière",
+      "en": "behind",
+      "emoji": "👈",
+      "category": "prepositions",
+      "example_fr": "Derrière la maison",
+      "example_en": "Behind the house",
+      "nl": "achter",
+      "example_nl": "Achter het huis"
+    },
+    {
+      "fr": "devant",
+      "en": "in front of",
+      "emoji": "👉",
+      "category": "prepositions",
+      "example_fr": "Devant l'école",
+      "example_en": "In front of the school"
+    },
+    {
+      "fr": "chez",
+      "en": "at, at someone's place, at someone's house, at Marie's",
+      "emoji": "🏠",
+      "category": "prepositions",
+      "example_fr": "Je suis chez Marie",
+      "example_en": "I'm at Marie's place / at Marie's"
+    },
+    {
+      "fr": "vers",
+      "en": "towards",
+      "emoji": "🎯",
+      "category": "prepositions",
+      "example_fr": "Je marche vers la gare",
+      "example_en": "I'm walking towards the station"
+    },
+    {
+      "fr": "pendant",
+      "en": "during",
+      "emoji": "⏰",
+      "category": "prepositions",
+      "example_fr": "Pendant les vacances",
+      "example_en": "During the holidays",
+      "nl": "tijdens",
+      "example_nl": "Tijdens de vakantie"
+    },
+    {
+      "fr": "avant",
+      "en": "before",
+      "emoji": "⏮️",
+      "category": "prepositions",
+      "example_fr": "Avant le dîner",
+      "example_en": "Before dinner",
+      "nl": "vóór",
+      "example_nl": "Vóór het avondeten"
+    },
+    {
+      "fr": "après",
+      "en": "after",
+      "emoji": "⏭️",
+      "category": "prepositions",
+      "example_fr": "Après le film",
+      "example_en": "After the movie",
+      "nl": "na",
+      "example_nl": "Na de film"
+    },
+    {
+      "fr": "contre",
+      "en": "against",
+      "emoji": "🛡️",
+      "category": "prepositions",
+      "example_fr": "Contre le mur",
+      "example_en": "Against the wall",
+      "nl": "tegen",
+      "example_nl": "Tegen de muur"
+    },
+    {
+      "fr": "parmi",
+      "en": "among",
+      "emoji": "👥",
+      "category": "prepositions",
+      "example_fr": "Parmi mes amis",
+      "example_en": "Among my friends"
+    },
+    {
+      "fr": "en",
+      "en": "in",
+      "emoji": "📍",
+      "category": "prepositions",
+      "example_fr": "En France • En voiture • En deux heures",
+      "example_en": "In France • By car • In two hours",
+      "nl": "in",
+      "example_nl": "De kat zit in de doos"
+    },
+    {
+      "fr": "depuis",
+      "en": "since, from",
+      "emoji": "📅",
+      "category": "prepositions",
+      "example_fr": "J'habite ici depuis 2020 • Depuis Paris",
+      "example_en": "I've lived here since 2020 • From Paris"
+    },
+    {
+      "fr": "jusque",
+      "en": "until, up to",
+      "emoji": "⏱️",
+      "category": "prepositions",
+      "example_fr": "Jusqu'à demain • Jusqu'à Paris",
+      "example_en": "Until tomorrow • Up to Paris",
+      "nl": "tot",
+      "example_nl": "Tot morgen • Tot hier"
+    },
+    {
+      "fr": "près de",
+      "en": "near",
+      "emoji": "📍",
+      "category": "prepositions",
+      "example_fr": "Près de la gare",
+      "example_en": "Near the station"
+    },
+    {
+      "fr": "loin de",
+      "en": "far from",
+      "emoji": "🏃",
+      "category": "prepositions",
+      "example_fr": "Loin de Paris",
+      "example_en": "Far from Paris"
+    },
+    {
+      "fr": "autour de",
+      "en": "around",
+      "emoji": "🔄",
+      "category": "prepositions",
+      "example_fr": "Autour de la table",
+      "example_en": "Around the table"
+    },
+    {
+      "fr": "dès",
+      "en": "from, as early as",
+      "emoji": "⏰",
+      "category": "prepositions",
+      "example_fr": "Dès demain • Dès maintenant",
+      "example_en": "From tomorrow • From now"
+    },
+    {
+      "fr": "durant",
+      "en": "during",
+      "emoji": "⌚",
+      "category": "prepositions",
+      "example_fr": "Durant l'été",
+      "example_en": "During the summer",
+      "nl": "tijdens",
+      "example_nl": "Tijdens de vakantie"
+    },
+    {
+      "fr": "malgré",
+      "en": "despite",
+      "emoji": "💪",
+      "category": "prepositions",
+      "example_fr": "Malgré la pluie",
+      "example_en": "Despite the rain",
+      "nl": "ondanks",
+      "example_nl": "Ondanks de regen"
+    },
+    {
+      "fr": "sauf",
+      "en": "except",
+      "emoji": "➖",
+      "category": "prepositions",
+      "example_fr": "Tous sauf Marie",
+      "example_en": "Everyone except Marie",
+      "nl": "behalve",
+      "example_nl": "Iedereen behalve Marie"
+    },
+    {
+      "fr": "selon",
+      "en": "according to",
+      "emoji": "📰",
+      "category": "prepositions",
+      "example_fr": "Selon Paul",
+      "example_en": "According to Paul",
+      "nl": "volgens",
+      "example_nl": "Volgens Paul"
+    },
+    {
+      "fr": "envers",
+      "en": "towards",
+      "emoji": "💗",
+      "category": "prepositions",
+      "example_fr": "Gentil envers les autres",
+      "example_en": "Kind towards others"
+    },
+    {
+      "fr": "grâce à",
+      "en": "thanks to",
+      "emoji": "🙏",
+      "category": "prepositions",
+      "example_fr": "Grâce à toi",
+      "example_en": "Thanks to you",
+      "nl": "dankzij",
+      "example_nl": "Dankzij jou"
+    },
+    {
+      "fr": "à cause de",
+      "en": "because of",
+      "emoji": "❓",
+      "category": "prepositions",
+      "example_fr": "À cause de la pluie",
+      "example_en": "Because of the rain"
+    },
+    {
+      "fr": "au lieu de",
+      "en": "instead of",
+      "emoji": "🔀",
+      "category": "prepositions",
+      "example_fr": "Au lieu de partir",
+      "example_en": "Instead of leaving",
+      "nl": "in plaats van",
+      "example_nl": "In plaats van weggaan"
+    },
+    {
+      "fr": "à côté de",
+      "en": "next to, beside",
+      "emoji": "👫",
+      "category": "prepositions",
+      "example_fr": "À côté de Marie",
+      "example_en": "Next to Marie",
+      "nl": "naast",
+      "example_nl": "Naast de bank"
+    },
+    {
+      "fr": "en face de",
+      "en": "across from, opposite",
+      "emoji": "↔️",
+      "category": "prepositions",
+      "example_fr": "En face de l'école",
+      "example_en": "Across from the school",
+      "nl": "tegenover",
+      "example_nl": "Tegenover de school"
+    },
+    {
+      "fr": "au-dessus de",
+      "en": "above",
+      "emoji": "⬆️",
+      "category": "prepositions",
+      "example_fr": "Au-dessus de la table",
+      "example_en": "Above the table"
+    },
+    {
+      "fr": "au-dessous de",
+      "en": "below",
+      "emoji": "⬇️",
+      "category": "prepositions",
+      "example_fr": "Au-dessous de zéro",
+      "example_en": "Below zero"
+    },
+    {
+      "fr": "je suis",
+      "en": "I am",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "présent",
+      "nl": "ik ben"
+    },
+    {
+      "fr": "tu es",
+      "en": "you are (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "présent",
+      "nl": "jij bent"
+    },
+    {
+      "fr": "il/elle est",
+      "en": "he/she is",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "présent",
+      "nl": "hij/zij is"
+    },
+    {
+      "fr": "nous sommes",
+      "en": "we are",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "présent",
+      "nl": "wij zijn"
+    },
+    {
+      "fr": "vous êtes",
+      "en": "you are (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "présent"
+    },
+    {
+      "fr": "ils/elles sont",
+      "en": "they are",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "présent",
+      "nl": "zij zijn"
+    },
+    {
+      "fr": "j'étais",
+      "en": "I was",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "imparfait",
+      "nl": "ik was"
+    },
+    {
+      "fr": "tu étais",
+      "en": "you were (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "imparfait",
+      "nl": "jij was"
+    },
+    {
+      "fr": "il/elle était",
+      "en": "he/she was",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "imparfait",
+      "nl": "hij/zij was"
+    },
+    {
+      "fr": "nous étions",
+      "en": "we were",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "imparfait",
+      "nl": "wij waren"
+    },
+    {
+      "fr": "vous étiez",
+      "en": "you were (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "ils/elles étaient",
+      "en": "they were",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "imparfait",
+      "nl": "zij waren"
+    },
+    {
+      "fr": "je vais être",
+      "en": "I am going to be",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur proche",
+      "nl": "ik ga zijn"
+    },
+    {
+      "fr": "tu vas être",
+      "en": "you are going to be (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur proche",
+      "nl": "jij gaat zijn"
+    },
+    {
+      "fr": "il/elle va être",
+      "en": "he/she is going to be",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur proche",
+      "nl": "hij/zij gaat zijn"
+    },
+    {
+      "fr": "nous allons être",
+      "en": "we are going to be",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur proche",
+      "nl": "wij gaan zijn"
+    },
+    {
+      "fr": "vous allez être",
+      "en": "you are going to be (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur proche"
+    },
+    {
+      "fr": "ils/elles vont être",
+      "en": "they are going to be",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur proche",
+      "nl": "zij gaan zijn"
+    },
+    {
+      "fr": "je serai",
+      "en": "I will be",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur",
+      "nl": "ik zal zijn"
+    },
+    {
+      "fr": "tu seras",
+      "en": "you will be (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur",
+      "nl": "jij zult zijn"
+    },
+    {
+      "fr": "il/elle sera",
+      "en": "he/she will be",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur",
+      "nl": "hij/zij zal zijn"
+    },
+    {
+      "fr": "nous serons",
+      "en": "we will be",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur",
+      "nl": "wij zullen zijn"
+    },
+    {
+      "fr": "vous serez",
+      "en": "you will be (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur"
+    },
+    {
+      "fr": "ils/elles seront",
+      "en": "they will be",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "futur",
+      "nl": "zij zullen zijn"
+    },
+    {
+      "fr": "j'ai été",
+      "en": "I was, I have been",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "passé composé",
+      "nl": "ik ben geweest"
+    },
+    {
+      "fr": "tu as été",
+      "en": "you were, you have been (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "passé composé",
+      "nl": "jij bent geweest"
+    },
+    {
+      "fr": "il/elle a été",
+      "en": "he/she was, he/she has been",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "passé composé",
+      "nl": "hij/zij is geweest"
+    },
+    {
+      "fr": "nous avons été",
+      "en": "we were, we have been",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "passé composé",
+      "nl": "wij zijn geweest"
+    },
+    {
+      "fr": "vous avez été",
+      "en": "you were, you have been (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "passé composé"
+    },
+    {
+      "fr": "ils/elles ont été",
+      "en": "they were, they have been",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "être",
+      "tense": "passé composé",
+      "nl": "zij zijn geweest"
+    },
+    {
+      "fr": "j'ai",
+      "en": "I have",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "présent",
+      "nl": "ik heb"
+    },
+    {
+      "fr": "tu as",
+      "en": "you have (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "présent",
+      "nl": "jij hebt"
+    },
+    {
+      "fr": "il/elle a",
+      "en": "he/she has",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "présent",
+      "nl": "hij/zij heeft"
+    },
+    {
+      "fr": "nous avons",
+      "en": "we have",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "présent",
+      "nl": "wij hebben"
+    },
+    {
+      "fr": "vous avez",
+      "en": "you have (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "présent"
+    },
+    {
+      "fr": "ils/elles ont",
+      "en": "they have",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "présent",
+      "nl": "zij hebben"
+    },
+    {
+      "fr": "j'avais",
+      "en": "I had",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "imparfait",
+      "nl": "ik had"
+    },
+    {
+      "fr": "tu avais",
+      "en": "you had (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "imparfait",
+      "nl": "jij had"
+    },
+    {
+      "fr": "il/elle avait",
+      "en": "he/she had",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "imparfait",
+      "nl": "hij/zij had"
+    },
+    {
+      "fr": "nous avions",
+      "en": "we had",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "imparfait",
+      "nl": "wij hadden"
+    },
+    {
+      "fr": "vous aviez",
+      "en": "you had (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "ils/elles avaient",
+      "en": "they had",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "imparfait",
+      "nl": "zij hadden"
+    },
+    {
+      "fr": "je vais avoir",
+      "en": "I am going to have",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur proche",
+      "nl": "ik ga hebben"
+    },
+    {
+      "fr": "tu vas avoir",
+      "en": "you are going to have (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur proche",
+      "nl": "jij gaat hebben"
+    },
+    {
+      "fr": "il/elle va avoir",
+      "en": "he/she is going to have",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur proche",
+      "nl": "hij/zij gaat hebben"
+    },
+    {
+      "fr": "nous allons avoir",
+      "en": "we are going to have",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur proche",
+      "nl": "wij gaan hebben"
+    },
+    {
+      "fr": "vous allez avoir",
+      "en": "you are going to have (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur proche"
+    },
+    {
+      "fr": "ils/elles vont avoir",
+      "en": "they are going to have",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur proche",
+      "nl": "zij gaan hebben"
+    },
+    {
+      "fr": "j'aurai",
+      "en": "I will have",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur",
+      "nl": "ik zal hebben"
+    },
+    {
+      "fr": "tu auras",
+      "en": "you will have (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur",
+      "nl": "jij zult hebben"
+    },
+    {
+      "fr": "il/elle aura",
+      "en": "he/she will have",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur",
+      "nl": "hij/zij zal hebben"
+    },
+    {
+      "fr": "nous aurons",
+      "en": "we will have",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur",
+      "nl": "wij zullen hebben"
+    },
+    {
+      "fr": "vous aurez",
+      "en": "you will have (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur"
+    },
+    {
+      "fr": "ils/elles auront",
+      "en": "they will have",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "futur",
+      "nl": "zij zullen hebben"
+    },
+    {
+      "fr": "j'ai eu",
+      "en": "I had, I have had",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "passé composé",
+      "nl": "ik heb gehad"
+    },
+    {
+      "fr": "tu as eu",
+      "en": "you had, you have had (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "passé composé",
+      "nl": "jij hebt gehad"
+    },
+    {
+      "fr": "il/elle a eu",
+      "en": "he/she had, he/she has had",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "passé composé",
+      "nl": "hij/zij heeft gehad"
+    },
+    {
+      "fr": "nous avons eu",
+      "en": "we had, we have had",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "passé composé",
+      "nl": "wij hebben gehad"
+    },
+    {
+      "fr": "vous avez eu",
+      "en": "you had, you have had (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "passé composé"
+    },
+    {
+      "fr": "ils/elles ont eu",
+      "en": "they had, they have had",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "avoir",
+      "tense": "passé composé",
+      "nl": "zij hebben gehad"
+    },
+    {
+      "fr": "je vais",
+      "en": "I go, I am going",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "présent",
+      "nl": "ik ga"
+    },
+    {
+      "fr": "tu vas",
+      "en": "you go, you are going (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "présent",
+      "nl": "jij gaat"
+    },
+    {
+      "fr": "il/elle va",
+      "en": "he/she goes, he/she is going",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "présent",
+      "nl": "hij/zij gaat"
+    },
+    {
+      "fr": "nous allons",
+      "en": "we go, we are going",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "présent",
+      "nl": "wij gaan"
+    },
+    {
+      "fr": "vous allez",
+      "en": "you go, you are going (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "présent"
+    },
+    {
+      "fr": "ils/elles vont",
+      "en": "they go, they are going",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "présent",
+      "nl": "zij gaan"
+    },
+    {
+      "fr": "j'allais",
+      "en": "I was going",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "tu allais",
+      "en": "you were going (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "il/elle allait",
+      "en": "he/she was going",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "nous allions",
+      "en": "we were going",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "vous alliez",
+      "en": "you were going (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "ils/elles allaient",
+      "en": "they were going",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "imparfait"
+    },
+    {
+      "fr": "je vais aller",
+      "en": "I am going to go",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur proche",
+      "nl": "ik ga gaan"
+    },
+    {
+      "fr": "tu vas aller",
+      "en": "you are going to go (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur proche",
+      "nl": "jij gaat gaan"
+    },
+    {
+      "fr": "il/elle va aller",
+      "en": "he/she is going to go",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur proche",
+      "nl": "hij/zij gaat gaan"
+    },
+    {
+      "fr": "nous allons aller",
+      "en": "we are going to go",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur proche",
+      "nl": "wij gaan gaan"
+    },
+    {
+      "fr": "vous allez aller",
+      "en": "you are going to go (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur proche"
+    },
+    {
+      "fr": "ils/elles vont aller",
+      "en": "they are going to go",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur proche",
+      "nl": "zij gaan gaan"
+    },
+    {
+      "fr": "j'irai",
+      "en": "I will go",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur",
+      "nl": "ik zal gaan"
+    },
+    {
+      "fr": "tu iras",
+      "en": "you will go (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur",
+      "nl": "jij zult gaan"
+    },
+    {
+      "fr": "il/elle ira",
+      "en": "he/she will go",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur",
+      "nl": "hij/zij zal gaan"
+    },
+    {
+      "fr": "nous irons",
+      "en": "we will go",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur",
+      "nl": "wij zullen gaan"
+    },
+    {
+      "fr": "vous irez",
+      "en": "you will go (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur"
+    },
+    {
+      "fr": "ils/elles iront",
+      "en": "they will go",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "futur",
+      "nl": "zij zullen gaan"
+    },
+    {
+      "fr": "je suis allé(e)",
+      "en": "I went, I have gone",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "passé composé",
+      "nl": "ik ben gegaan"
+    },
+    {
+      "fr": "tu es allé(e)",
+      "en": "you went, you have gone (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "passé composé",
+      "nl": "jij bent gegaan"
+    },
+    {
+      "fr": "il/elle est allé(e)",
+      "en": "he/she went, he/she has gone",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "passé composé",
+      "nl": "hij/zij is gegaan"
+    },
+    {
+      "fr": "nous sommes allé(e)s",
+      "en": "we went, we have gone",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "passé composé",
+      "nl": "wij zijn gegaan"
+    },
+    {
+      "fr": "vous êtes allé(e)(s)",
+      "en": "you went, you have gone (formal/plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "passé composé"
+    },
+    {
+      "fr": "ils/elles sont allé(e)s",
+      "en": "they went, they have gone",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "aller",
+      "tense": "passé composé",
+      "nl": "zij zijn gegaan"
+    },
+    {
+      "nl": "voor",
+      "en": "in front of, for, before",
+      "emoji": "👉",
+      "category": "prepositions",
+      "example_nl": "Voor de school • Dat is voor jou",
+      "example_en": "In front of the school • That is for you"
+    },
+    {
+      "nl": "naar",
+      "en": "to, towards",
+      "emoji": "➡️",
+      "category": "prepositions",
+      "example_nl": "Ik ga naar Amsterdam",
+      "example_en": "I'm going to Amsterdam"
+    },
+    {
+      "nl": "bij",
+      "en": "at, near, with",
+      "emoji": "🏠",
+      "category": "prepositions",
+      "example_nl": "Bij Marie thuis • Bij de school",
+      "example_en": "At Marie's place • Near the school"
+    },
+    {
+      "nl": "over",
+      "en": "over, about, across",
+      "emoji": "🌉",
+      "category": "prepositions",
+      "example_nl": "Over de brug • We praten over het weer",
+      "example_en": "Across the bridge • We talk about the weather"
+    },
+    {
+      "nl": "door",
+      "en": "through, by",
+      "emoji": "🚪",
+      "category": "prepositions",
+      "example_nl": "Door het park • Geschreven door Paul",
+      "example_en": "Through the park • Written by Paul"
+    },
+    {
+      "nl": "uit",
+      "en": "from, out of",
+      "emoji": "📤",
+      "category": "prepositions",
+      "example_nl": "Uit Nederland • Kom uit de kamer",
+      "example_en": "From the Netherlands • Come out of the room"
+    },
+    {
+      "nl": "aan",
+      "en": "at, on, to",
+      "emoji": "📍",
+      "category": "prepositions",
+      "example_nl": "Aan het strand • Aan de muur",
+      "example_en": "At the beach • On the wall"
+    },
+    {
+      "nl": "om",
+      "en": "around, at (time)",
+      "emoji": "🔄",
+      "category": "prepositions",
+      "example_nl": "Om de tafel • Om 5 uur",
+      "example_en": "Around the table • At 5 o'clock"
+    },
+    {
+      "nl": "langs",
+      "en": "along, past",
+      "emoji": "🛣️",
+      "category": "prepositions",
+      "example_nl": "Langs de rivier • Ik loop langs de winkel",
+      "example_en": "Along the river • I walk past the shop"
+    },
+    {
+      "nl": "in de buurt van",
+      "en": "near, close to",
+      "emoji": "📍",
+      "category": "prepositions",
+      "example_nl": "In de buurt van het station",
+      "example_en": "Near the station"
+    },
+    {
+      "nl": "jullie zijn",
+      "en": "you are (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "zijn",
+      "tense": "tegenwoordige tijd"
+    },
+    {
+      "nl": "jullie waren",
+      "en": "you were (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "zijn",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "jullie gaan zijn",
+      "en": "you are going to be (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "zijn",
+      "tense": "onmiddellijke toekomst"
+    },
+    {
+      "nl": "jullie zullen zijn",
+      "en": "you will be (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "zijn",
+      "tense": "toekomende tijd"
+    },
+    {
+      "nl": "jullie zijn geweest",
+      "en": "you were, you have been (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "zijn",
+      "tense": "voltooid tegenwoordige tijd"
+    },
+    {
+      "nl": "jullie hebben",
+      "en": "you have (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "hebben",
+      "tense": "tegenwoordige tijd"
+    },
+    {
+      "nl": "jullie hadden",
+      "en": "you had (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "hebben",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "jullie gaan hebben",
+      "en": "you are going to have (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "hebben",
+      "tense": "onmiddellijke toekomst"
+    },
+    {
+      "nl": "jullie zullen hebben",
+      "en": "you will have (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "hebben",
+      "tense": "toekomende tijd"
+    },
+    {
+      "nl": "jullie hebben gehad",
+      "en": "you had, you have had (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "hebben",
+      "tense": "voltooid tegenwoordige tijd"
+    },
+    {
+      "nl": "jullie gaan",
+      "en": "you go, you are going (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "tegenwoordige tijd"
+    },
+    {
+      "nl": "ik ging",
+      "en": "I was going, I went",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "jij ging",
+      "en": "you were going, you went (informal)",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "hij/zij ging",
+      "en": "he/she was going, he/she went",
+      "emoji": "👤",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "wij gingen",
+      "en": "we were going, we went",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "jullie gingen",
+      "en": "you were going, you went (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "zij gingen",
+      "en": "they were going, they went",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "verleden tijd"
+    },
+    {
+      "nl": "jullie gaan gaan",
+      "en": "you are going to go (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "onmiddellijke toekomst"
+    },
+    {
+      "nl": "jullie zullen gaan",
+      "en": "you will go (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "toekomende tijd"
+    },
+    {
+      "nl": "jullie zijn gegaan",
+      "en": "you went, you have gone (plural)",
+      "emoji": "👥",
+      "category": "conjugations",
+      "verb": "gaan",
+      "tense": "voltooid tegenwoordige tijd"
+    }
+  ]
+}

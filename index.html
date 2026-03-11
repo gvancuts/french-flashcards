@@ -36,7 +36,7 @@ h1 span { color: var(--accent1); }
   gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 480px;
+  max-width: 560px;
   width: 100%;
 }
 .lang-btn {
@@ -61,6 +61,22 @@ h1 span { color: var(--accent1); }
 .lang-btn .flag { font-size: 3rem; line-height: 1; }
 .lang-btn .name { font-size: 1.1rem; font-weight: 700; color: var(--card-back); }
 .lang-btn .count { font-size: 0.75rem; color: #B0BFCF; font-weight: 600; letter-spacing: 0.04em; }
+
+.step2-header { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+.btn-back {
+  padding: 8px 16px; border-radius: 40px; border: 2px solid rgba(58,90,140,0.2);
+  background: white; font-family: inherit; font-size: 0.88rem; font-weight: 700;
+  color: var(--card-back); cursor: pointer; box-shadow: 0 2px 8px rgba(58,90,140,0.08);
+}
+.btn-back:hover { border-color: var(--card-back); }
+.from-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: white; border-radius: 50px; padding: 8px 16px;
+  font-weight: 700; color: var(--card-back); font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(58,90,140,0.08);
+}
+.arrow { color: #B0BFCF; font-size: 1.2rem; }
+
 .status { margin-top: 28px; font-size: 0.9rem; color: #6B7C93; min-height: 22px; }
 .status.error { color: var(--accent1); font-weight: 600; }
 .current-deck {
@@ -71,27 +87,17 @@ h1 span { color: var(--accent1); }
   padding: 14px 22px;
   font-size: 0.88rem;
   color: #6B7C93;
-  max-width: 320px;
+  max-width: 360px;
 }
 .current-deck strong { color: var(--card-back); }
 .current-deck a { color: var(--accent4); font-weight: 700; text-decoration: none; margin-left: 6px; }
 .current-deck a:hover { text-decoration: underline; }
 
-/* UI language selector */
 .ui-lang-select {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  padding: 5px 10px;
-  border-radius: 20px;
-  border: 1.5px solid rgba(58,90,140,0.2);
-  background: white;
-  font-family: inherit;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--card-back);
-  cursor: pointer;
-  outline: none;
+  position: fixed; top: 14px; right: 14px; padding: 5px 10px;
+  border-radius: 20px; border: 1.5px solid rgba(58,90,140,0.2);
+  background: white; font-family: inherit; font-size: 0.8rem; font-weight: 700;
+  color: var(--card-back); cursor: pointer; outline: none;
   box-shadow: 0 2px 8px rgba(58,90,140,0.08);
 }
 .ui-lang-select:focus { border-color: var(--card-back); }
@@ -106,19 +112,20 @@ h1 span { color: var(--accent1); }
 </select>
 
 <h1>🎴 Flashcard <span>Trainer</span></h1>
-<p class="subtitle" id="subtitle">Choose a language to study:</p>
+<p class="subtitle" id="subtitle">Loading…</p>
 
-<div class="lang-grid">
-  <button class="lang-btn" id="btn-fr" onclick="loadDeck('fr')">
-    <span class="flag">🇫🇷</span>
-    <span class="name" id="fr-name">French</span>
-    <span class="count" id="fr-count">…</span>
-  </button>
-  <button class="lang-btn" id="btn-nl" onclick="loadDeck('nl')">
-    <span class="flag">🇳🇱</span>
-    <span class="name" id="nl-name">Dutch</span>
-    <span class="count" id="nl-count">…</span>
-  </button>
+<div id="step1" style="display:none">
+  <div class="lang-grid" id="sourceLangGrid"></div>
+</div>
+
+<div id="step2" style="display:none">
+  <div class="step2-header">
+    <button class="btn-back" id="backBtn">← Back</button>
+    <div class="from-badge" id="fromBadge"></div>
+    <span class="arrow">→</span>
+    <span style="font-weight:700;color:#7A8BA0;font-size:1rem" id="toLabel">?</span>
+  </div>
+  <div class="lang-grid" id="targetLangGrid"></div>
 </div>
 
 <div class="status" id="status"></div>
@@ -128,57 +135,56 @@ h1 span { color: var(--accent1); }
 (function() {
   'use strict';
 
-  // --- i18n ---
-  var STRINGS = {
+  // --- Built-in per-language display info (i18n labels) ---
+  var LANG_DISPLAY = {
+    fr: { en: 'French',  fr: 'Français',   nl: 'Frans'      },
+    nl: { en: 'Dutch',   fr: 'Néerlandais', nl: 'Nederlands' },
+    en: { en: 'English', fr: 'Anglais',     nl: 'Engels'     }
+  };
+
+  var UI_STRINGS = {
     en: {
       title: 'Flashcard Trainer',
-      subtitle: 'Choose a language to study:',
+      step1: 'I know…',
+      step2: 'I want to practice…',
+      back: '← Back',
+      arrow: '→',
+      cards: 'cards',
+      loading: 'Loading…',
       currentlyLoaded: 'Currently loaded:',
       continuePlaying: '▶ Continue playing',
-      loading: 'Loading\u2026',
-      cards: 'cards',
-      errorMsg: 'Could not load — make sure you are using a web server, not file://',
-      langFr: 'French', langNl: 'Dutch'
+      error: 'Could not load — make sure you are using a web server, not file://'
     },
     fr: {
       title: 'Entraîneur de Cartes',
-      subtitle: 'Choisissez une langue à étudier\u00a0:',
-      currentlyLoaded: 'Actuellement chargé\u00a0:',
-      continuePlaying: '▶ Continuer à jouer',
-      loading: 'Chargement\u2026',
+      step1: 'Je connais…',
+      step2: 'Je veux pratiquer…',
+      back: '← Retour',
+      arrow: '→',
       cards: 'cartes',
-      errorMsg: 'Impossible de charger — utilisez un serveur web, pas file://',
-      langFr: 'Français', langNl: 'Néerlandais'
+      loading: 'Chargement…',
+      currentlyLoaded: 'Actuellement chargé :',
+      continuePlaying: '▶ Continuer à jouer',
+      error: 'Impossible de charger — utilisez un serveur web, pas file://'
     },
     nl: {
       title: 'Flitskaarten Trainer',
-      subtitle: 'Kies een taal om te oefenen:',
+      step1: 'Ik ken…',
+      step2: 'Ik wil oefenen…',
+      back: '← Terug',
+      arrow: '→',
+      cards: 'kaarten',
+      loading: 'Laden…',
       currentlyLoaded: 'Momenteel geladen:',
       continuePlaying: '▶ Doorgaan',
-      loading: 'Laden\u2026',
-      cards: 'kaarten',
-      errorMsg: 'Kon niet laden — gebruik een webserver, niet file://',
-      langFr: 'Frans', langNl: 'Nederlands'
+      error: 'Kon niet laden — gebruik een webserver, niet file://'
     }
   };
 
   var uiLang = localStorage.getItem('ui_lang') || 'en';
+  function t(key) { return (UI_STRINGS[uiLang] || UI_STRINGS.en)[key] || key; }
+  function langName(code) { return (LANG_DISPLAY[code] || {})[uiLang] || code.toUpperCase(); }
 
-  function t(key) {
-    return (STRINGS[uiLang] || STRINGS.en)[key] || key;
-  }
-
-  function applyUiLang() {
-    document.getElementById('subtitle').textContent = t('subtitle');
-    document.title = t('title');
-    document.getElementById('fr-name').textContent = t('langFr');
-    document.getElementById('nl-name').textContent = t('langNl');
-    renderCount('fr');
-    renderCount('nl');
-    renderCurrentDeck();
-  }
-
-  // Set the dropdown to match stored lang
   var sel = document.getElementById('uiLangSelect');
   sel.value = uiLang;
   sel.onchange = function() {
@@ -187,67 +193,209 @@ h1 span { color: var(--accent1); }
     applyUiLang();
   };
 
-  // Show count on buttons once JSON is fetched
-  var fetchedCounts = {};
-
-  function renderCount(lang) {
-    var el = document.getElementById(lang + '-count');
-    if (el && fetchedCounts[lang] !== undefined) {
-      el.textContent = fetchedCounts[lang] + ' ' + t('cards');
-    }
+  function applyUiLang() {
+    document.title = t('title');
+    document.getElementById('backBtn').textContent = t('back');
+    document.getElementById('toLabel').textContent = t('step2');
+    renderCurrentDeck();
+    // Re-render whichever step is visible
+    if (document.getElementById('step1').style.display !== 'none') showStep1();
+    else if (currentSource) showStep2(currentSource);
   }
 
-  function fetchCount(lang) {
-    fetch('data/' + lang + '.json')
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        fetchedCounts[lang] = d.cards.length;
-        renderCount(lang);
-      })
-      .catch(function() {
-        var el = document.getElementById(lang + '-count');
-        if (el) el.textContent = '';
+  // --- State ---
+  var manifest = null;
+  var loadedFiles = {};
+  var currentSource = null;
+
+  // --- Init ---
+  document.getElementById('status').textContent = t('loading');
+  fetch('data/manifest.json')
+    .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
+    .then(function(data) {
+      manifest = data;
+      document.getElementById('status').textContent = '';
+      applyUiLang();
+      showStep1();
+    })
+    .catch(function() {
+      document.getElementById('status').textContent = t('error');
+      document.getElementById('status').className = 'status error';
+    });
+
+  function showStep1() {
+    if (!manifest) return;
+    document.getElementById('step1').style.display = '';
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('subtitle').textContent = t('step1');
+
+    // Collect all unique source languages
+    var langs = [];
+    var seen = {};
+    manifest.forEach(function(entry) {
+      entry.languages.forEach(function(lang) {
+        if (!seen[lang]) { seen[lang] = true; langs.push(lang); }
       });
+    });
+
+    var grid = document.getElementById('sourceLangGrid');
+    grid.innerHTML = '';
+    langs.forEach(function(lang) {
+      var meta = manifest.reduce(function(acc, e) {
+        if (e.languages.indexOf(lang) >= 0) acc.push(e);
+        return acc;
+      }, []);
+      var btn = document.createElement('button');
+      btn.className = 'lang-btn';
+      // Get flag from first file containing this lang
+      btn.innerHTML = '<span class="flag">' + getFlagForLang(lang) + '</span>' +
+        '<span class="name">' + langName(lang) + '</span>' +
+        '<span class="count" id="src-count-' + lang + '"></span>';
+      btn.onclick = function() { showStep2(lang); };
+      grid.appendChild(btn);
+    });
+
+    renderCurrentDeck();
+  }
+
+  function getFlagForLang(lang) {
+    // Try to get flag from a loaded file, else fall back to built-in
+    for (var key in loadedFiles) {
+      var f = loadedFiles[key];
+      if (f.languages && f.languages[lang] && f.languages[lang].flag) {
+        return f.languages[lang].flag;
+      }
+    }
+    var flags = { fr: '🇫🇷', nl: '🇳🇱', en: '🇬🇧' };
+    return flags[lang] || '🏳️';
+  }
+
+  function showStep2(sourceLang) {
+    currentSource = sourceLang;
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = '';
+    document.getElementById('subtitle').textContent = t('step2');
+
+    // Show "from" badge
+    var fromBadge = document.getElementById('fromBadge');
+    fromBadge.innerHTML = getFlagForLang(sourceLang) + ' <span>' + langName(sourceLang) + '</span>';
+
+    var grid = document.getElementById('targetLangGrid');
+    grid.innerHTML = '<span style="color:#B0BFCF;font-size:0.9rem">' + t('loading') + '</span>';
+
+    // Find all files containing sourceLang
+    var matchingEntries = manifest.filter(function(e) {
+      return e.languages.indexOf(sourceLang) >= 0;
+    });
+
+    // Load all matching files
+    Promise.all(matchingEntries.map(function(entry) {
+      if (loadedFiles[entry.file]) return Promise.resolve(loadedFiles[entry.file]);
+      return fetch('data/' + entry.file)
+        .then(function(r) { return r.json(); })
+        .then(function(d) { loadedFiles[entry.file] = d; return d; });
+    })).then(function(files) {
+      // Collect target langs and card counts
+      var targets = {};
+      files.forEach(function(file) {
+        var langKeys = Object.keys(file.languages || {});
+        langKeys.forEach(function(targetLang) {
+          if (targetLang === sourceLang) return;
+          var count = file.cards.filter(function(c) {
+            return c[sourceLang] && c[targetLang];
+          }).length;
+          if (!targets[targetLang]) targets[targetLang] = 0;
+          targets[targetLang] += count;
+        });
+      });
+
+      grid.innerHTML = '';
+      var targetKeys = Object.keys(targets);
+      if (targetKeys.length === 0) {
+        grid.innerHTML = '<span style="color:#B0BFCF">No targets available</span>';
+        return;
+      }
+      targetKeys.forEach(function(targetLang) {
+        var btn = document.createElement('button');
+        btn.className = 'lang-btn';
+        btn.innerHTML = '<span class="flag">' + getFlagForLang(targetLang) + '</span>' +
+          '<span class="name">' + langName(targetLang) + '</span>' +
+          '<span class="count">' + targets[targetLang] + ' ' + t('cards') + '</span>';
+        btn.onclick = function() { selectPair(sourceLang, targetLang); };
+        grid.appendChild(btn);
+      });
+    }).catch(function() {
+      grid.innerHTML = '<span style="color:#FF6B6B">' + t('error') + '</span>';
+    });
+  }
+
+  function selectPair(sourceLang, targetLang) {
+    var status = document.getElementById('status');
+    status.textContent = t('loading');
+    status.className = 'status';
+
+    // Collect all matching cards from all relevant files
+    var matchingEntries = manifest.filter(function(e) {
+      return e.languages.indexOf(sourceLang) >= 0 && e.languages.indexOf(targetLang) >= 0;
+    });
+
+    Promise.all(matchingEntries.map(function(entry) {
+      if (loadedFiles[entry.file]) return Promise.resolve(loadedFiles[entry.file]);
+      return fetch('data/' + entry.file)
+        .then(function(r) { return r.json(); })
+        .then(function(d) { loadedFiles[entry.file] = d; return d; });
+    })).then(function(files) {
+      var allCards = [];
+      var config = null;
+
+      files.forEach(function(file) {
+        // Filter cards to those with both source and target fields
+        var filtered = file.cards.filter(function(c) {
+          return c[sourceLang] && c[targetLang];
+        });
+        allCards = allCards.concat(filtered);
+
+        // Build config from first file
+        if (!config && file.languages) {
+          config = {
+            sourceLang: sourceLang,
+            targetLang: targetLang,
+            source: file.languages[sourceLang],
+            target: file.languages[targetLang],
+            categories: file.categories || {}
+          };
+        }
+      });
+
+      if (!config || allCards.length === 0) {
+        throw new Error('no cards');
+      }
+
+      localStorage.setItem('flashcard_config', JSON.stringify(config));
+      localStorage.setItem('flashcard_deck', JSON.stringify(allCards));
+      window.location.href = 'flashcards.html';
+    }).catch(function() {
+      status.textContent = t('error');
+      status.className = 'status error';
+    });
   }
 
   function renderCurrentDeck() {
     var cfg = JSON.parse(localStorage.getItem('flashcard_config') || 'null');
     var box = document.getElementById('currentDeckBox');
-    if (cfg) {
+    if (cfg && cfg.source && cfg.target) {
       box.innerHTML = '<div class="current-deck">' + t('currentlyLoaded') +
-        ' <strong>' + cfg.flag + ' ' + cfg.label + '</strong>' +
+        ' <strong>' + (cfg.source.flag || '') + ' ' + langName(cfg.sourceLang) +
+        ' → ' + langName(cfg.targetLang) + ' ' + (cfg.target.flag || '') + '</strong>' +
         '<a href="flashcards.html">' + t('continuePlaying') + '</a></div>';
     } else {
       box.innerHTML = '';
     }
   }
 
-  // Initial render
-  applyUiLang();
-  fetchCount('fr');
-  fetchCount('nl');
-
-  window.loadDeck = async function(lang) {
-    var status = document.getElementById('status');
-    var btn = document.getElementById('btn-' + lang);
-    if (btn) btn.disabled = true;
-    status.textContent = '';
-    status.className = 'status';
-
-    status.textContent = t('loading');
-
-    try {
-      var resp = await fetch('data/' + lang + '.json');
-      if (!resp.ok) throw new Error('HTTP ' + resp.status);
-      var data = await resp.json();
-      localStorage.setItem('flashcard_deck', JSON.stringify(data.cards));
-      localStorage.setItem('flashcard_config', JSON.stringify(data.config));
-      window.location.href = 'flashcards.html';
-    } catch (e) {
-      status.textContent = t('errorMsg');
-      status.className = 'status error';
-      if (btn) btn.disabled = false;
-    }
+  document.getElementById('backBtn').onclick = function() {
+    currentSource = null;
+    showStep1();
   };
 })();
 </script>
