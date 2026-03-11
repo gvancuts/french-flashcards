@@ -328,28 +328,25 @@ h1 span { color: var(--accent1); }
 
     if (u === tgt) return true;
 
-    // Accept any one value from a comma-separated list
+    var articleRe = (mode === 'forward') ? TARGET_ARTICLE_RE : SOURCE_ARTICLE_RE;
+
+    // Accept any one value from a comma-separated list (any single form counts as correct)
     if (tgt.includes(',')) {
       const opts = tgt.split(',').map(function(o) { return o.trim(); });
       for (var i = 0; i < opts.length; i++) {
         if (u === opts[i]) return true;
+        if (stripAccents(u) === stripAccents(opts[i])) return true;
+        if (articleRe) {
+          const noArt = normalise(opts[i].replace(articleRe, ''));
+          if (u === noArt || stripAccents(u) === stripAccents(noArt)) return true;
+        }
       }
-    }
-    if (u.includes(',')) {
-      const userOpts = u.split(',').map(function(o) { return o.trim(); });
-      const tgtOpts = tgt.split(',').map(function(o) { return o.trim(); });
-      var allValid = userOpts.length > 0;
-      for (var i = 0; i < userOpts.length; i++) {
-        if (tgtOpts.indexOf(userOpts[i]) < 0) { allValid = false; break; }
-      }
-      if (allValid) return true;
     }
 
     // Accent-insensitive match
     if (stripAccents(u) === stripAccents(tgt)) return true;
 
-    // Strip articles based on which language the user is typing
-    var articleRe = (mode === 'forward') ? TARGET_ARTICLE_RE : SOURCE_ARTICLE_RE;
+    // Strip articles
     if (articleRe) {
       const noArticle = normalise(tgt.replace(articleRe, ''));
       if (u === noArticle || stripAccents(u) === stripAccents(noArticle)) return true;
