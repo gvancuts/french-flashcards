@@ -1,3 +1,12 @@
 [
-  { "file": "fr-nl-en.json", "languages": ["fr", "nl", "en"] }
+  {
+    "file": "fr-nl-en.json",
+    "languages": ["fr", "nl", "en"],
+    "topic": { "en": "🧠 Body & Grammar", "fr": "🧠 Corps & Grammaire", "nl": "🧠 Lichaam & Grammatica" }
+  },
+  {
+    "file": "transport.json",
+    "languages": ["fr", "nl", "en"],
+    "topic": { "en": "🚗 Transport", "fr": "🚗 Transports", "nl": "🚗 Vervoer" }
+  }
 ]

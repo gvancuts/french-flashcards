@@ -1,0 +1,335 @@
+{
+  "languages": {
+    "fr": {
+      "label": "French",
+      "flag": "🇫🇷",
+      "accents": [
+        "à",
+        "â",
+        "ç",
+        "è",
+        "é",
+        "ê",
+        "ë",
+        "î",
+        "ï",
+        "ô",
+        "ù",
+        "û",
+        "ü",
+        "œ",
+        "æ"
+      ],
+      "articleRegex": "^(le|la|les|l')\\s*"
+    },
+    "nl": {
+      "label": "Dutch",
+      "flag": "🇳🇱",
+      "accents": [
+        "ë",
+        "ï",
+        "ö",
+        "ü",
+        "é",
+        "è",
+        "ê",
+        "à",
+        "â",
+        "ç",
+        "ô",
+        "û"
+      ],
+      "articleRegex": "^(de|het|een)\\s*"
+    },
+    "en": {
+      "label": "English",
+      "flag": "🇬🇧",
+      "accents": [],
+      "articleRegex": "^the\\s+"
+    }
+  },
+  "cards": [
+    {
+      "fr": "signifier (ça veut dire)",
+      "nl": "betekenen (het betekent)",
+      "en": "to mean (it means)",
+      "emoji": "💬"
+    },
+    {
+      "fr": "mieux, meilleur",
+      "nl": "beter",
+      "en": "better",
+      "emoji": "👍"
+    },
+    {
+      "fr": "le pont, les ponts",
+      "nl": "de brug, de bruggen",
+      "en": "the bridge, the bridges",
+      "emoji": "🌉"
+    },
+    {
+      "fr": "continuer à conduire",
+      "nl": "doorrijden (ik rijd door, jij rijdt door)",
+      "en": "to keep driving, to drive through",
+      "emoji": "🚗"
+    },
+    {
+      "fr": "l'un l'autre",
+      "nl": "elkaar",
+      "en": "each other",
+      "emoji": "🤝"
+    },
+    {
+      "fr": "de l'un l'autre",
+      "nl": "elkaars",
+      "en": "each other's",
+      "emoji": "🤝"
+    },
+    {
+      "fr": "le cycliste, les cyclistes",
+      "nl": "de fietser, de fietsers",
+      "en": "the cyclist, the cyclists",
+      "emoji": "🚴"
+    },
+    {
+      "fr": "la piste cyclable, les pistes cyclables",
+      "nl": "het fietspad, de fietspaden",
+      "en": "the bike path, the bike paths",
+      "emoji": "🛣️"
+    },
+    {
+      "fr": "l'embouteillage, les embouteillages",
+      "nl": "de file, de files",
+      "en": "the traffic jam, the traffic jams",
+      "emoji": "🚦"
+    },
+    {
+      "fr": "avoir raison",
+      "nl": "gelijk hebben",
+      "en": "to be right",
+      "emoji": "✅"
+    },
+    {
+      "fr": "le danger",
+      "nl": "het gevaar",
+      "en": "the danger",
+      "emoji": "⚠️"
+    },
+    {
+      "fr": "l'arrêt, les arrêts",
+      "nl": "de halte, de haltes",
+      "en": "the stop, the stops",
+      "emoji": "🚏"
+    },
+    {
+      "fr": "le coin, l'angle",
+      "nl": "de hoek",
+      "en": "the corner, the angle",
+      "emoji": "📐"
+    },
+    {
+      "fr": "au coin",
+      "nl": "op de hoek",
+      "en": "on the corner",
+      "emoji": "📍"
+    },
+    {
+      "fr": "la glace, les glaces",
+      "nl": "het ijsje, de ijsjes",
+      "en": "the ice-cream, the ice-creams",
+      "emoji": "🍦"
+    },
+    {
+      "fr": "dépasser",
+      "nl": "inhalen (ik haal in, jij haalt in)",
+      "en": "to overtake",
+      "emoji": "🚗"
+    },
+    {
+      "fr": "entrer (en vélo, en voiture), circuler",
+      "nl": "inrijden (ik rijd in, jij rijdt in)",
+      "en": "to drive into",
+      "emoji": "🚗"
+    },
+    {
+      "fr": "le carrefour, les carrefours",
+      "nl": "het kruispunt, de kruispunten",
+      "en": "the crossing, the crossings",
+      "emoji": "✖️"
+    },
+    {
+      "fr": "plus tard",
+      "nl": "later",
+      "en": "later",
+      "emoji": "⏰"
+    },
+    {
+      "fr": "tourner à gauche",
+      "nl": "linksaf gaan",
+      "en": "to turn left",
+      "emoji": "↰"
+    },
+    {
+      "fr": "l'accident, les accidents",
+      "nl": "het ongeluk, de ongelukken",
+      "en": "the accident, the accidents",
+      "emoji": "💥"
+    },
+    {
+      "fr": "l'embouteillage, les embouteillages",
+      "nl": "de opstopping, de opstoppingen",
+      "en": "the traffic jam, the traffic jams",
+      "emoji": "🚦"
+    },
+    {
+      "fr": "à l'autre côté",
+      "nl": "aan de overkant",
+      "en": "at the other side",
+      "emoji": "↔️"
+    },
+    {
+      "fr": "traverser",
+      "nl": "oversteken (ik steek over, jij steekt over)",
+      "en": "to cross",
+      "emoji": "🚶"
+    },
+    {
+      "fr": "stationner",
+      "nl": "parkeren (ik parkeer, jij parkeert)",
+      "en": "to park",
+      "emoji": "🅿️"
+    },
+    {
+      "fr": "le parking",
+      "nl": "de parking, de parkeerplaats",
+      "en": "the parking, the parking lot",
+      "emoji": "🅿️"
+    },
+    {
+      "fr": "super",
+      "nl": "prima",
+      "en": "great",
+      "emoji": "🌟"
+    },
+    {
+      "fr": "tout droit",
+      "nl": "rechtdoor",
+      "en": "straight ahead",
+      "emoji": "⬆️"
+    },
+    {
+      "fr": "tourner à droite",
+      "nl": "rechtsaf gaan",
+      "en": "to turn right",
+      "emoji": "↱"
+    },
+    {
+      "fr": "la calculatrice, les calculatrices",
+      "nl": "de rekenmachine, de rekenmachines",
+      "en": "the calculator, the calculators",
+      "emoji": "🧮"
+    },
+    {
+      "fr": "courir",
+      "nl": "rennen (ik ren, jij rent)",
+      "en": "to run",
+      "emoji": "🏃"
+    },
+    {
+      "fr": "le rond-point",
+      "nl": "de rotonde, de rotondes",
+      "en": "the roundabout",
+      "emoji": "🔄"
+    },
+    {
+      "fr": "l'autoroute, les autoroutes",
+      "nl": "de snelweg, de snelwegen",
+      "en": "the highway, the highways",
+      "emoji": "🛣️"
+    },
+    {
+      "fr": "la voie",
+      "nl": "het spoor",
+      "en": "the railway track",
+      "emoji": "🚂"
+    },
+    {
+      "fr": "le trottoir",
+      "nl": "de stoep, het trottoir",
+      "en": "the sidewalk",
+      "emoji": "🚶"
+    },
+    {
+      "fr": "le trait, les traits, la ligne, les lignes, les rayures",
+      "nl": "de streep, de strepen",
+      "en": "the line, the lines, the dash, the dashes",
+      "emoji": "➖"
+    },
+    {
+      "fr": "contre",
+      "nl": "tegen",
+      "en": "against",
+      "emoji": "🛡️"
+    },
+    {
+      "fr": "sûr (pas dangereux)",
+      "nl": "veilig (veilige)",
+      "en": "safe",
+      "emoji": "✅"
+    },
+    {
+      "fr": "interdit",
+      "nl": "verboden",
+      "en": "prohibited, forbidden",
+      "emoji": "🚫"
+    },
+    {
+      "fr": "le trafic",
+      "nl": "het verkeer",
+      "en": "the traffic",
+      "emoji": "🚗"
+    },
+    {
+      "fr": "le panneau (de signalisation), les panneaux",
+      "nl": "het verkeersbord, de verkeersborden",
+      "en": "the traffic sign, the traffic signs",
+      "emoji": "🪧"
+    },
+    {
+      "fr": "le feu (de signalisation), les feux",
+      "nl": "het verkeerslicht, de verkeerslichten",
+      "en": "the traffic light, the traffic lights",
+      "emoji": "🚦"
+    },
+    {
+      "fr": "raconter",
+      "nl": "vertellen (ik vertel, jij vertelt)",
+      "en": "to tell",
+      "emoji": "🗣️"
+    },
+    {
+      "fr": "le piéton, les piétons",
+      "nl": "de voetganger, de voetgangers",
+      "en": "the pedestrian, the pedestrians",
+      "emoji": "🚶"
+    },
+    {
+      "fr": "en avant",
+      "nl": "voorop",
+      "en": "ahead",
+      "emoji": "⬆️"
+    },
+    {
+      "fr": "le camion, les camions",
+      "nl": "de vrachtwagen, de vrachtwagens",
+      "en": "the truck, the trucks",
+      "emoji": "🚛"
+    },
+    {
+      "fr": "le passage piéton",
+      "nl": "het zebrapad",
+      "en": "the zebra crossing",
+      "emoji": "🦓"
+    }
+  ]
+}

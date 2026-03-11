@@ -33,10 +33,6 @@ h1 { font-weight: 800; font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--card-
 h1 span { color: var(--accent1); }
 .subtitle { font-size: 0.95rem; color: #7A8BA0; margin-top: 4px; font-weight: 600; }
 
-.tabs { display: flex; gap: 8px; margin-bottom: 20px; background: rgba(255,255,255,0.7); border-radius: 50px; padding: 5px; flex-wrap: wrap; justify-content: center; }
-.tab { padding: 8px 18px; border-radius: 40px; border: none; font-weight: 700; cursor: pointer; background: transparent; color: #7A8BA0; }
-.tab.active { background: var(--card-back); color: white; }
-
 .top-controls { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
 .pill-btn { padding: 7px 16px; border-radius: 40px; border: 2px solid rgba(58,90,140,0.2); font-weight: 700; font-size: 0.85rem; cursor: pointer; background: transparent; color: #7A8BA0; }
 .pill-btn.active { background: var(--accent2); border-color: var(--accent2); color: var(--text-dark); }
@@ -125,14 +121,6 @@ h1 span { color: var(--accent1); }
   <span class="flag" id="langFlag">🎴</span>
   <h1 id="appHeadline">Flashcard <span>Trainer</span></h1>
 </header>
-
-<div class="tabs">
-  <button class="tab active" id="tab-all">🃏 All Words</button>
-  <button class="tab" id="tab-visage">😊 Face</button>
-  <button class="tab" id="tab-corps">🧍 Body</button>
-  <button class="tab" id="tab-prepositions">📍 Prepositions</button>
-  <button class="tab" id="tab-conjugations">🔄 Conjugations</button>
-</div>
 
 <div class="top-controls">
   <button class="pill-btn active" id="mode-forward">→</button>
@@ -290,20 +278,6 @@ h1 span { color: var(--accent1); }
     if (banner.classList.contains('show')) {
       renderReviewBanner(banner.dataset.reviewType || 'missed');
     }
-    // Update category tab labels from config
-    updateCategoryTabs();
-  }
-
-  function updateCategoryTabs() {
-    var cats = (_cfg.categories) || {};
-    ['visage','corps','prepositions','conjugations'].forEach(function(cat) {
-      var el = document.getElementById('tab-' + cat);
-      if (!el) return;
-      var labels = cats[cat];
-      if (labels) {
-        el.textContent = labels[uiLang] || labels.en || el.textContent;
-      }
-    });
   }
 
   function renderReviewBanner(type) {
@@ -535,16 +509,6 @@ h1 span { color: var(--accent1); }
     document.getElementById('reviewSkippedBtn').disabled = skipped === 0;
   }
 
-  function setCategory(cat) {
-    ['all','visage','corps','prepositions','conjugations'].forEach(function(c) {
-      document.getElementById('tab-' + c).classList.toggle('active', c === cat);
-    });
-    cards = (cat === 'all') ? allCards.slice() : allCards.filter(function(c) { return c.category === cat; });
-    scores = {}; skippedCards = {}; current = 0; reviewMode = false;
-    document.getElementById('reviewBanner').classList.remove('show');
-    renderCard(); updateStats();
-  }
-
   function setMode(m) {
     mode = m;
     document.getElementById('mode-forward').classList.toggle('active', m === 'forward');
@@ -604,12 +568,6 @@ h1 span { color: var(--accent1); }
   document.getElementById('reviewBtn').onclick = function(e) { e.preventDefault(); reviewMissed(); return false; };
   document.getElementById('reviewSkippedBtn').onclick = function(e) { e.preventDefault(); reviewSkipped(); return false; };
   document.getElementById('exitReviewBtn').onclick = function(e) { e.preventDefault(); exitReview(); return false; };
-
-  document.getElementById('tab-all').onclick = function() { setCategory('all'); };
-  document.getElementById('tab-visage').onclick = function() { setCategory('visage'); };
-  document.getElementById('tab-corps').onclick = function() { setCategory('corps'); };
-  document.getElementById('tab-prepositions').onclick = function() { setCategory('prepositions'); };
-  document.getElementById('tab-conjugations').onclick = function() { setCategory('conjugations'); };
 
   document.getElementById('mode-forward').onclick = function() { setMode('forward'); };
   document.getElementById('mode-reverse').onclick = function() { setMode('reverse'); };
